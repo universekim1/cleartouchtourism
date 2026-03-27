@@ -50,18 +50,22 @@ allHtmlFiles.forEach(file => {
     // Normalize simple attributes
     content = content.replace(/(src|data-src|href|content)=["'](\.\.\/|\.\/)*wp-content\//g, '$1="/wp-content/');
     content = content.replace(/(src|data-src|href|content)=["'](\.\.\/|\.\/)*gtag\//g, '$1="/gtag/');
+    content = content.replace(/(src|data-src|href|content)=["'](\.\.\/|\.\/)*swisstransfer_adb5aa58-50bc-442a-b691-e88db09a118c\//g, '$1="/swisstransfer_adb5aa58-50bc-442a-b691-e88db09a118c/');
 
     // Normalize srcset and data-srcset (which can have multiple comma-separated values)
     const srcsetRegex = /(srcset|data-srcset)=["']([^"']+)["']/g;
     content = content.replace(srcsetRegex, (match, attr, value) => {
         const normalizedValue = value.split(',').map(part => {
             const trimmed = part.trim();
-            if (trimmed.startsWith('wp-content/') || trimmed.startsWith('../wp-content/') || trimmed.startsWith('./wp-content/')) {
-                 // Remove any leading ./ or ../ and add /
-                 const cleanPart = trimmed.replace(/^(\.\.\/|\.\/)+/, '');
-                 return `/${cleanPart}`;
+            const prefixes = ['wp-content/', 'swisstransfer_adb5aa58-50bc-442a-b691-e88db09a118c/'];
+            
+            for (const prefix of prefixes) {
+                if (trimmed.startsWith(prefix) || trimmed.startsWith('../' + prefix) || trimmed.startsWith('./' + prefix)) {
+                     // Remove any leading ./ or ../ and add /
+                     const cleanPart = trimmed.replace(/^(\.\.\/|\.\/)+/, '');
+                     return `/${cleanPart}`;
+                }
             }
-            // Also handle if the relative path was deeper, but HTTrack usually stays within the root structure.
             return part;
         }).join(', ');
         return `${attr}="${normalizedValue}"`;
