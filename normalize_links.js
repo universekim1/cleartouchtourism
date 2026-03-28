@@ -3,10 +3,10 @@ const path = require('path');
 
 const baseDir = __dirname;
 const contactEmail = 'contact@cleartouch.com';
-const contactPhone = '+974 4400 0000';
+const contactPhone = '+97459914706';
 const instagramUrl = 'https://www.instagram.com/clear_touch_media';
 const tiktokUrl = 'https://www.tiktok.com/@clear_touch_media';
-const whatsappUrl = "https://wa.me/97444000000?text=Hi%20ClearTouch%20Media%2C%20I'm%20interested%20in%20booking%20a%20photography%20tour%20in%20Doha!";
+const whatsappUrl = "https://wa.me/+97459914706?text=Hi%20ClearTouch%20Media%2C%20I'm%20interested%20in%20booking%20a%20photography%20tour%20in%20Doha!";
 
 function getAllHtmlFiles(dir, fileList = []) {
     const files = fs.readdirSync(dir);
@@ -32,10 +32,10 @@ htmlFiles.forEach(filePath => {
     // 1. Normalize internal links in <a> tags
     // Matches href="../index.htm", href="index.htm" (if not in root), etc.
     // We want to convert them to /index.htm, /destinations/index.htm, etc.
-    
+
     // Core pages mapping
     const corePages = ['index.htm', 'destinations', 'agency', 'method', 'contact', 'privacy-policy', 'terms-of-service'];
-    
+
     corePages.forEach(page => {
         const pagePath = page === 'index.htm' ? 'index.htm' : `${page}/index.htm`;
         const regex = new RegExp(`href="(\\.\\.\\/)*${pagePath.replace(/\//g, '\\/')}"`, 'g');
@@ -53,7 +53,7 @@ htmlFiles.forEach(filePath => {
     // Replace various phone numbers
     content = content.replace(/tel:\+974\s?[0-9\s]+/g, `tel:${contactPhone}`);
     content = content.replace(/>\+974\s?[0-9\s]+<\/a>/g, `>${contactPhone}</a>`);
-    
+
     // Replace emails
     content = content.replace(/mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, `mailto:${contactEmail}`);
     content = content.replace(/class="xl:hover:text-mist">[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}<\/a>/g, `class="xl:hover:text-mist">${contactEmail}</a>`);

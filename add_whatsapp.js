@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = __dirname;
-const whatsappNumber = '97444000000';
+const whatsappNumber = '+97459914706';
 const whatsappMessage = encodeURIComponent("Hi ClearTouch Media, I'm interested in booking a photography tour in Doha!");
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -34,28 +34,28 @@ function processFile(filePath) {
 
     // 3. Update Link Text (Linkedin -> Tiktok)
     // We do this carefully for both classes
-    
+
     // Header pattern
     content = content.replace(/(class="header-social-link[^>]+">)Linkedin(<\/a>)/g, '$1Tiktok$2');
-    
+
     // Footer pattern
     content = content.replace(/(class="xl:hover:text-mist">)Linkedin(<\/a>)/g, '$1Tiktok$2');
-    
+
     // Contact page pattern
     content = content.replace(/(class="xl:hover:text-white">)Linkedin(<\/a>)/g, '$1Tiktok$2');
 
     // 4. Add WhatsApp after TikTok/Tiktok (if not already added)
-    if (!content.includes('wa.me/97444000000')) {
+    if (!content.includes('wa.me/+97459914706')) {
         // Header pattern
-        content = content.replace(/(class="header-social-link[^>]+">(?:TikTok|Tiktok))<\/a>/g, 
+        content = content.replace(/(class="header-social-link[^>]+">(?:TikTok|Tiktok))<\/a>/g,
             '$1,</a>\n              <a href="' + whatsappLink + '" target="_blank" rel="noopener"\n                class="header-social-link xl:hover:text-mist transition-colors duration-normal ease-out">WhatsApp</a>');
-        
+
         // Footer pattern
-        content = content.replace(/(class="xl:hover:text-mist">(?:TikTok|Tiktok))<\/a>/g, 
+        content = content.replace(/(class="xl:hover:text-mist">(?:TikTok|Tiktok))<\/a>/g,
             '$1,</a>\n                      <a href="' + whatsappLink + '" target="_blank" rel="noopener"\n                        class="xl:hover:text-mist">WhatsApp</a>');
-        
+
         // Contact page pattern
-        content = content.replace(/(class="xl:hover:text-white">(?:TikTok|Tiktok))<\/a>/g, 
+        content = content.replace(/(class="xl:hover:text-white">(?:TikTok|Tiktok))<\/a>/g,
             '$1,</a>\n                      <a href="' + whatsappLink + '" target="_blank" rel="noopener"\n                        class="xl:hover:text-white">WhatsApp</a>');
     }
 
