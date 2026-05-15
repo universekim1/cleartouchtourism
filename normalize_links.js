@@ -52,11 +52,11 @@ htmlFiles.forEach(filePath => {
     // 4. Standardize Footer Contact Details
     // Replace various phone numbers
     content = content.replace(/tel:\+974\s?[0-9\s]+/g, `tel:${contactPhone}`);
-    content = content.replace(/>\+974\s?[0-9\s]+<\/a>/g, `>${contactPhone}</a>`);
+    content = content.replace(/>\s*\+974\s?[0-9\s]+\s*<\/a>/g, `>${contactPhone}</a>`);
 
     // Replace emails
     content = content.replace(/mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, `mailto:${contactEmail}`);
-    content = content.replace(/class="xl:hover:text-mist">[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}<\/a>/g, `class="xl:hover:text-mist">${contactEmail}</a>`);
+    content = content.replace(/>\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\s*<\/a>/g, `>${contactEmail}</a>`);
 
     // Replace Address block content
     content = content.replace(/<p>\s*59 Garden Street[\s\S]*?Victoria, Australia 3141\s*<\/p>/g, '<p>Doha<br />Qatar</p>');
