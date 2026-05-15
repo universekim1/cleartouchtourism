@@ -54,7 +54,7 @@ allHtmlFiles.forEach(file => {
     content = content.replace(/courts of Victoria/g, 'courts of Doha');
 
     // Terms of service title and text
-    content = content.replace(/telhaclarke\.com\.au/g, 'cleartouch.com');
+    content = content.replace(/telhaclarke\.com\.au/g, 'cleartouchmedia.com');
 
     fs.writeFileSync(file, content, 'utf8');
 });
