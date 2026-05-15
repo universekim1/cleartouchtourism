@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const baseDir = __dirname;
-const contactEmail = 'contact@cleartouch.com';
-const contactPhone = '+97459914706';
+const contactEmail = 'bookings@cleartouchmedia.com';
+const contactPhone = '+97455484718';
 const instagramUrl = 'https://www.instagram.com/clear_touch_media';
 const tiktokUrl = 'https://www.tiktok.com/@clear_touch_media';
-const whatsappUrl = "https://wa.me/+97459914706?text=Hi%20ClearTouch%20Media%2C%20I'm%20interested%20in%20booking%20a%20photography%20tour%20in%20Doha!";
+const whatsappUrl = "https://wa.me/+97455484718?text=Hi%20ClearTouch%20Media%2C%20I'm%20interested%20in%20booking%20a%20photography%20tour%20in%20Doha!";
 
 function getAllHtmlFiles(dir, fileList = []) {
     const files = fs.readdirSync(dir);

@@ -40,12 +40,12 @@ allHtmlFiles.forEach(file => {
     content = content.replace(/<span class="line">59 Garden Street,\s*<\/span><span class="line">South Yarra\s*<\/span><span class="line">Victoria, Australia 3141/g, '<span class="line">Doha, Qatar </span><span class="line">West Bay</span>');
 
     // Phone
-    content = content.replace(/\+61 3 8672 5999/g, '+97459914706');
+    content = content.replace(/\+61 3 8672 5999/g, '+97455484718');
 
     // Email
-    content = content.replace(/contact@telhaclarke\.com\.au/g, 'contact@cleartouch.com');
+    content = content.replace(/contact@telhaclarke\.com\.au/g, 'bookings@cleartouchmedia.com');
     // For href="mailto:"
-    content = content.replace(/mailto:contact@telhaclarke\.com\.au/g, 'mailto:contact@cleartouch.com');
+    content = content.replace(/mailto:contact@telhaclarke\.com\.au/g, 'mailto:bookings@cleartouchmedia.com');
 
     // 3. ClearTouch Media naming conventions on Terms page
     content = content.replace(/ClearTouch Media \("we", "us", "our"\)/g, 'ClearTouch Media ("we", "us", "our")');

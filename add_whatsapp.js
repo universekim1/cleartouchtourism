@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = __dirname;
-const whatsappNumber = '+97459914706';
+const whatsappNumber = '+97455484718';
 const whatsappMessage = encodeURIComponent("Hi ClearTouch Media, I'm interested in booking a photography tour in Doha!");
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -45,7 +45,7 @@ function processFile(filePath) {
     content = content.replace(/(class="xl:hover:text-white">)Linkedin(<\/a>)/g, '$1Tiktok$2');
 
     // 4. Add WhatsApp after TikTok/Tiktok (if not already added)
-    if (!content.includes('wa.me/+97459914706')) {
+    if (!content.includes('wa.me/+97455484718')) {
         // Header pattern
         content = content.replace(/(class="header-social-link[^>]+">(?:TikTok|Tiktok))<\/a>/g,
             '$1,</a>\n              <a href="' + whatsappLink + '" target="_blank" rel="noopener"\n                class="header-social-link xl:hover:text-mist transition-colors duration-normal ease-out">WhatsApp</a>');
