@@ -1,11 +1,14 @@
 {
-  "name": "cleartouchmedia-deploy",
+  "name": "cleartouch-redesign",
+  "type": "module",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
-    "build": "cd new-site && npm ci && npm run build"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^7.0.3"
   }
 }
