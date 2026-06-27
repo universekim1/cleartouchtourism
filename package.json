@@ -1,0 +1,11 @@
+{
+  "name": "cleartouchmedia-deploy",
+  "private": true,
+  "version": "0.0.0",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "cd new-site && npm ci && npm run build"
+  }
+}
