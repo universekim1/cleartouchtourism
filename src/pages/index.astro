@@ -2,9 +2,11 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
-import { site, nav, offerings, photoServices, destinations, why, testimonials } from "../data/site";
+import { site, offerings, photoServices, destinations, why, testimonials } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
 import about from "../assets/images/about.jpg";
@@ -21,63 +23,7 @@ const destImg = (slug: string) =>
 const wa = `https://wa.me/${site.whatsapp}`;
 ---
 <Base>
-  <!-- ============ TOP UTILITY BAR ============ -->
-  <div class="topbar">
-    <div class="container">
-      <div class="topbar__left">
-        <a class="topbar__item" href={`tel:${site.phoneRaw}`}><Icon name="phone" size={15} />{site.phone}</a>
-        <a class="topbar__item" href={`mailto:${site.email}`}><Icon name="mail" size={15} />{site.email}</a>
-        <span class="topbar__item"><Icon name="pin" size={15} />{site.location}</span>
-      </div>
-      <div class="topbar__right">
-        <span class="rating">★★★★★ {site.rating} <span>· {site.reviewCount} happy clients</span></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ HEADER / NAV ============ -->
-  <header class="header" id="siteHeader">
-    <div class="container">
-      <a class="brand" href="#home">
-        <span class="brand__mark">CT</span>
-        <span>
-          <span class="brand__name">Clear Touch Tourism &amp; Services</span>
-          <span class="brand__sub">Photography &amp; Videography</span>
-        </span>
-      </a>
-      <nav class="nav">
-        {nav.map((n, i) => <a href={n.href} class={i === 0 ? "active" : ""}>{n.label}</a>)}
-      </nav>
-      <div class="header__cta">
-        <a class="btn btn--gold btn--book" href={wa}>Book Now</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
-      <a class="btn btn--gold" href={wa}>Book Now</a>
-    </div>
-  </header>
-
-  <script is:inline>
-    (function () {
-      var h = document.getElementById("siteHeader");
-      var t = document.getElementById("navToggle");
-      if (!h || !t) return;
-      t.addEventListener("click", function () {
-        var open = h.classList.toggle("is-open");
-        t.setAttribute("aria-expanded", open ? "true" : "false");
-      });
-      document.querySelectorAll("#mobileMenu a").forEach(function (a) {
-        a.addEventListener("click", function () {
-          h.classList.remove("is-open");
-          t.setAttribute("aria-expanded", "false");
-        });
-      });
-    })();
-  </script>
+  <Header active="home" />
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="home">
@@ -93,7 +39,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
           photography and videography to remember every moment. One trusted team, two ways to wow.
         </p>
         <div class="hero__cta">
-          <a class="btn btn--gold" href="#tours">Explore Tours <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--gold" href="/tours">Explore Tours <Icon name="arrow" size={18} /></a>
           <a class="btn btn--whatsapp" href={wa}>Chat on WhatsApp</a>
         </div>
 
@@ -182,7 +128,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
           </div>
           <div class="hero__cta" style="margin-top:30px;">
             <a class="btn btn--gold" href={wa}>Book a Shoot <Icon name="arrow" size={18} /></a>
-            <a class="btn btn--outline" href="#contact">View Portfolio</a>
+            <a class="btn btn--outline" href="/photography">View Portfolio</a>
           </div>
         </div>
       </div>
@@ -201,7 +147,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
         {destinations.map((d) => {
           const img = destImg(d.slug);
           return (
-            <a class="dest" href="#contact">
+            <a class="dest" href="/tours">
               {img && <Image src={img} alt={d.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
               <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
             </a>
@@ -276,38 +222,5 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <span class="brand__name">Clear Touch Tourism & Services</span>
-          <p>Doha-based tours, photography and videography. One trusted team for unforgettable Qatar experiences.</p>
-        </div>
-        <div>
-          <h5>Tours</h5>
-          <a href="#tours">Desert Safaris</a><a href="#tours">City & Culture</a>
-          <a href="#tours">Cruises & Dining</a><a href="#tours">Island & Beach</a>
-        </div>
-        <div>
-          <h5>Studio</h5>
-          <a href="#photography">Travel Photography</a><a href="#photography">Video & Reels</a>
-          <a href="#photography">Events & Portraits</a><a href="#photography">Portfolio</a>
-        </div>
-        <div>
-          <h5>Contact</h5>
-          <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-          <a href={wa}>WhatsApp</a>
-          <span style="display:block; padding:5px 0;">{site.location}</span>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© {new Date().getFullYear()} Clear Touch Tourism & Services. All rights reserved.</span>
-        <span>Licensed by Qatar Tourism</span>
-      </div>
-    </div>
-  </footer>
-
-  <a class="fab" href={wa} aria-label="Chat on WhatsApp"><Icon name="chat" size={28} /></a>
+  <Footer />
 </Base>

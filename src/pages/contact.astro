@@ -1,0 +1,92 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+import heroImg from "../assets/images/destinations/souq-waqif.jpg";
+
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<Base title="Contact — Clear Touch Tourism & Services"
+      description="Get in touch with Clear Touch Tourism & Services in Doha, Qatar — call, email or message us on WhatsApp to plan tours, photography or video.">
+  <Header active="contact" />
+
+  <PageHero image={heroImg} eyebrow="Contact"
+    title="Let's plan your Qatar experience"
+    subtitle="Tours, photography or both — reach us any time. We're on WhatsApp around the clock and reply fast." />
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="h-display">Talk to a real person</h2>
+          <p class="lead" style="margin-top:14px;">Prefer to message directly? Use any of these — we're happy to help plan anything.</p>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="feature__icon"><Icon name="phone" size={22} /></div>
+              <div><h4>Call</h4><a href={`tel:${site.phoneRaw}`}>{site.phone}</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="feature__icon"><Icon name="mail" size={22} /></div>
+              <div><h4>Email</h4><a href={`mailto:${site.email}`}>{site.email}</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="feature__icon"><Icon name="chat" size={22} /></div>
+              <div><h4>WhatsApp</h4><a href={wa}>Message us</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="feature__icon"><Icon name="pin" size={22} /></div>
+              <div><h4>Location</h4><span>{site.location}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <form id="inquiryForm" data-wa={site.whatsapp}>
+            <div class="form-row">
+              <label for="cName">Your name</label>
+              <input id="cName" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="form-row">
+              <label for="cService">What do you need</label>
+              <select id="cService" name="service">
+                <option>Tour / experience</option>
+                <option>Photography session</option>
+                <option>Video / reel shoot</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="cMsg">Message</label>
+              <textarea id="cMsg" name="message" placeholder="Tell us your dates and what you'd love to do..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--gold" style="width:100%; justify-content:center;">
+              Send via WhatsApp <Icon name="arrow" size={18} />
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var f = document.getElementById("inquiryForm");
+      if (!f) return;
+      f.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var num = f.getAttribute("data-wa");
+        var name = (document.getElementById("cName") || {}).value || "";
+        var service = (document.getElementById("cService") || {}).value || "";
+        var msg = (document.getElementById("cMsg") || {}).value || "";
+        var text = "Hi Clear Touch! I am " + name + ". I'm interested in: " + service + "." + (msg ? " " + msg : "");
+        window.open("https://wa.me/" + num + "?text=" + encodeURIComponent(text), "_blank");
+      });
+    })();
+  </script>
+
+  <Footer />
+</Base>

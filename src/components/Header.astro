@@ -1,0 +1,64 @@
+---
+import Icon from "./Icon.astro";
+import { site, nav } from "../data/site";
+interface Props { active?: string; }
+const { active = "" } = Astro.props;
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<!-- ============ TOP UTILITY BAR ============ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar__left">
+      <a class="topbar__item" href={`tel:${site.phoneRaw}`}><Icon name="phone" size={15} />{site.phone}</a>
+      <a class="topbar__item" href={`mailto:${site.email}`}><Icon name="mail" size={15} />{site.email}</a>
+      <span class="topbar__item"><Icon name="pin" size={15} />{site.location}</span>
+    </div>
+    <div class="topbar__right">
+      <span class="rating">★★★★★ {site.rating} <span>· {site.reviewCount} happy clients</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="header" id="siteHeader">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand__mark">CT</span>
+      <span>
+        <span class="brand__name">Clear Touch Tourism &amp; Services</span>
+        <span class="brand__sub">Photography &amp; Videography</span>
+      </span>
+    </a>
+    <nav class="nav">
+      {nav.map((n) => <a href={n.href} class={n.key === active ? "active" : ""}>{n.label}</a>)}
+    </nav>
+    <div class="header__cta">
+      <a class="btn btn--gold btn--book" href={wa}>Book Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    {nav.map((n) => <a href={n.href} class={n.key === active ? "active" : ""}>{n.label}</a>)}
+    <a class="btn btn--gold" href={wa}>Book Now</a>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var h = document.getElementById("siteHeader");
+    var t = document.getElementById("navToggle");
+    if (!h || !t) return;
+    t.addEventListener("click", function () {
+      var open = h.classList.toggle("is-open");
+      t.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.querySelectorAll("#mobileMenu a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        h.classList.remove("is-open");
+        t.setAttribute("aria-expanded", "false");
+      });
+    });
+  })();
+</script>

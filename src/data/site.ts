@@ -13,12 +13,11 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Home", href: "#home" },
-  { label: "Tours", href: "#tours" },
-  { label: "Photography", href: "#photography" },
-  { label: "Why Us", href: "#why" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { key: "home", label: "Home", href: "/" },
+  { key: "tours", label: "Tours", href: "/tours" },
+  { key: "photography", label: "Photography", href: "/photography" },
+  { key: "about", label: "About", href: "/about" },
+  { key: "contact", label: "Contact", href: "/contact" },
 ];
 
 // Tourism service pillars

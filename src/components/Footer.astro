@@ -1,0 +1,39 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="brand__name">Clear Touch Tourism &amp; Services</span>
+        <p>Doha-based tours, photography and videography. One trusted team for unforgettable Qatar experiences.</p>
+      </div>
+      <div>
+        <h5>Tours</h5>
+        <a href="/tours">Desert Safaris</a><a href="/tours">City &amp; Culture</a>
+        <a href="/tours">Cruises &amp; Dining</a><a href="/tours">Island &amp; Beach</a>
+      </div>
+      <div>
+        <h5>Studio</h5>
+        <a href="/photography">Travel Photography</a><a href="/photography">Video &amp; Reels</a>
+        <a href="/photography">Events &amp; Portraits</a><a href="/photography">Portfolio</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={wa}>WhatsApp</a>
+        <a href="/contact">Get in touch</a>
+        <span style="display:block; padding:5px 0;">{site.location}</span>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© {new Date().getFullYear()} Clear Touch Tourism &amp; Services. All rights reserved.</span>
+      <span>Licensed by Qatar Tourism</span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href={wa} aria-label="Chat on WhatsApp"><Icon name="chat" size={28} /></a>

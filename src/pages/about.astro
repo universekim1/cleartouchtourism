@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import PageHero from "../components/PageHero.astro";
+import { site, why, testimonials } from "../data/site";
+import about from "../assets/images/about.jpg";
+
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<Base title="About — Clear Touch Tourism & Services"
+      description="Clear Touch Tourism & Services is a Doha-based, fully licensed tour operator and creative studio. Meet the team behind your Qatar experience.">
+  <Header active="about" />
+
+  <PageHero image={about} eyebrow="About us"
+    title="Travel with the experts who care"
+    subtitle="One trusted team for unforgettable Qatar experiences — on the ground and behind the lens." />
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="split split--reverse">
+        <div class="media-frame">
+          <Image src={about} alt="Clear Touch guests in Doha" widths={[600, 1000]} sizes="(max-width:900px) 100vw, 540px" />
+          <div class="stat-badge"><strong>{site.yearsBadge}</strong><span>years creating Qatar memories</span></div>
+        </div>
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2 class="h-display">A local team, two ways to wow</h2>
+          <div class="prose">
+            <p>
+              Clear Touch Tourism &amp; Services is a Doha-based, fully licensed tour operator and creative
+              studio. We do two things, and we do them well: show you the very best of Qatar, and capture it
+              so the memories last forever.
+            </p>
+            <p>
+              From desert safaris to the Inland Sea, Souq Waqif evenings and luxury dhow cruises, our guides
+              make every day effortless. And when the moment matters, our photographers and filmmakers are the
+              same crew who know every location — so the imagery feels real, not staged.
+            </p>
+          </div>
+          <div class="feature-list">
+            {why.map((w) => (
+              <div class="feature">
+                <div class="feature__icon"><Icon name={w.icon} size={22} /></div>
+                <div><h4>{w.title}</h4><p>{w.text}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Loved by travellers</p>
+        <h2 class="h-display">What our guests say</h2>
+        <p>Rated {site.rating}/5 across Google, TripAdvisor &amp; GetYourGuide.</p>
+      </div>
+      <div class="tgrid">
+        {testimonials.map((t) => (
+          <div class="tcard">
+            <div class="stars">★★★★★</div>
+            <blockquote>“{t.quote}”</blockquote>
+            <div class="tcard__who">
+              <div class="avatar">{t.initial}</div>
+              <div><b>{t.name}</b><span>{t.place}</span></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="cta-band">
+        <h2>Let's plan something unforgettable</h2>
+        <p>Whether it's a tour, a shoot, or both — we'd love to help.</p>
+        <div class="hero__cta">
+          <a class="btn btn--white" href={wa}>Chat on WhatsApp</a>
+          <a class="btn btn--ghost" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

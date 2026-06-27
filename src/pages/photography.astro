@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import PageHero from "../components/PageHero.astro";
+import { site, photoServices } from "../data/site";
+import heroImg from "../assets/images/portfolio/shot-2.jpg";
+
+const portfolio = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>("../assets/images/portfolio/*.jpg", { eager: true })
+).map((m) => m.default);
+const destShots = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>("../assets/images/destinations/*.jpg", { eager: true })
+).map((m) => m.default);
+const gallery = [...portfolio, ...destShots];
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<Base title="Photography & Video — Clear Touch Tourism & Services"
+      description="Doha-based photography and videography studio — travel and destination imagery, cinematic films and reels, weddings, events and portraits.">
+  <Header active="photography" />
+
+  <PageHero image={heroImg} eyebrow="Photography & video"
+    title="Memories, beautifully made"
+    subtitle="A Doha-based creative studio capturing travel, events and brands across Qatar — the same crew that knows every location on your tour." />
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we shoot</p>
+        <h2 class="h-display">Creative services</h2>
+        <p>Stills and motion, on location anywhere in Qatar.</p>
+      </div>
+      <div class="grid-3">
+        {photoServices.map((p) => (
+          <article class="card">
+            <div class="card__icon"><Icon name={p.icon} /></div>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Selected work</p>
+        <h2 class="h-display">Portfolio</h2>
+        <p>A glimpse of recent shoots across Qatar.</p>
+      </div>
+      <div class="gallery">
+        {gallery.map((img, i) => (
+          <Image src={img} alt={`Clear Touch photography ${i + 1}`}
+                 widths={[400, 800]} sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 360px" />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="cta-band">
+        <h2>Have a shoot in mind?</h2>
+        <p>Weddings, events, brand campaigns or travel content — let's create something beautiful.</p>
+        <div class="hero__cta">
+          <a class="btn btn--white" href={wa}>Book a shoot</a>
+          <a class="btn btn--ghost" href="/contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

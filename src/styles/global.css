@@ -300,3 +300,45 @@ ul { list-style: none; padding: 0; }
   .brand__name { font-size: 1rem; max-width: none; }
   .brand__sub { display: none; }
 }
+
+/* ===========================================================
+   Inner pages (Tours / Photography / About / Contact)
+   =========================================================== */
+.page-hero { position: relative; background: var(--navy); color:#fff; overflow:hidden; isolation:isolate; }
+.page-hero__bg { position:absolute; inset:0; z-index:-2; }
+.page-hero__bg img { width:100%; height:100%; object-fit:cover; }
+.page-hero::after { content:""; position:absolute; inset:0; z-index:-1;
+  background: linear-gradient(180deg, rgba(10,40,55,.72), rgba(10,40,55,.88)); }
+.page-hero .container { padding-block: clamp(60px, 9vw, 104px); }
+.page-hero__eyebrow { color: var(--gold-light); }
+.page-hero__title { font-family: var(--serif); font-weight:700; line-height:1.05; letter-spacing:-.015em;
+  font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.page-hero__sub { margin-top:14px; max-width:640px; color:#d3e2e8; font-size: clamp(1.02rem,1.6vw,1.18rem); }
+
+.lead { font-size: clamp(1.05rem,1.7vw,1.25rem); color: var(--ink-soft); max-width: 720px; }
+.prose p { color: var(--ink-soft); margin-top: 16px; max-width: 720px; }
+.center { text-align:center; margin-inline:auto; }
+.grid-2 { display:grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+
+.gallery { columns: 3; column-gap: 14px; }
+.gallery img { width:100%; margin-bottom:14px; border-radius:14px; box-shadow: var(--shadow-sm); display:block; break-inside: avoid; }
+
+.contact-grid { display:grid; grid-template-columns: 1fr 1.1fr; gap: clamp(30px,5vw,56px); align-items:start; }
+.contact-list { display:flex; flex-direction:column; gap:18px; margin-top: 8px; }
+.contact-item { display:flex; gap:14px; align-items:flex-start; }
+.contact-item h4 { font-size:1rem; font-weight:700; }
+.contact-item a, .contact-item span { color: var(--ink-soft); }
+.contact-card { background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(24px,4vw,36px); box-shadow: var(--shadow-sm); }
+.form-row { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.form-row label { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+.form-row input, .form-row select, .form-row textarea {
+  font: inherit; padding: 12px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); width:100%; }
+.form-row textarea { min-height:120px; resize:vertical; }
+
+@media (max-width: 900px) {
+  .grid-2, .contact-grid { grid-template-columns: 1fr; }
+  .gallery { columns: 2; }
+}
+@media (max-width: 560px) {
+  .gallery { columns: 1; }
+}
