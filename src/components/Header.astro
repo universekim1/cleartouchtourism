@@ -33,7 +33,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
       {nav.map((n) => <a href={n.href} class={n.key === active ? "active" : ""}>{n.label}</a>)}
     </nav>
     <div class="header__cta">
-      <a class="btn btn--gold btn--book" href={wa}>Book Now</a>
+      <a class="btn btn--gold btn--book" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Book Now</a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -41,7 +41,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
   </div>
   <div class="mobile-menu" id="mobileMenu">
     {nav.map((n) => <a href={n.href} class={n.key === active ? "active" : ""}>{n.label}</a>)}
-    <a class="btn btn--gold" href={wa}>Book Now</a>
+    <a class="btn btn--gold" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Book Now</a>
   </div>
 </header>
 

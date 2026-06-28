@@ -10,6 +10,8 @@ export const site = {
   rating: "4.9",
   reviewCount: "2,800+",
   yearsBadge: "12+",
+  calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
+  calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
 };
 
 export const nav = [

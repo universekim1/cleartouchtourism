@@ -55,15 +55,11 @@ const wa = `https://wa.me/${site.whatsapp}`;
             </select>
           </div>
           <div class="booking__field">
-            <label for="date">Date</label>
-            <input id="date" type="date" />
-          </div>
-          <div class="booking__field">
             <label for="guests">Guests</label>
             <select id="guests"><option>2 Guests</option><option>1 Guest</option><option>3–4 Guests</option><option>5+ Guests</option></select>
           </div>
           <div class="booking__submit">
-            <a class="btn btn--gold" href={wa}>Check Availability</a>
+            <a class="btn btn--gold" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Check live availability — pick a date &amp; time →</a>
           </div>
         </form>
       </div>
