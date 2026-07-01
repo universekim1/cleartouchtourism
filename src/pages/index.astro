@@ -166,10 +166,20 @@ const wa = `https://wa.me/${site.whatsapp}`;
         {destinations.map((d) => {
           const img = destImg(d.slug);
           return (
-            <a class="dest" href="/tours">
-              {img && <Image src={img} alt={d.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
-              <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
-            </a>
+            <div class="dest" data-flip>
+              <div class="dest__inner">
+                <div class="dest__face dest__front">
+                  {img && <Image src={img} alt={d.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
+                  <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
+                  <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
+                </div>
+                <div class="dest__face dest__back">
+                  <span class="dest__tag">{d.tag}</span>
+                  <h3>{d.name}</h3>
+                  <a class="btn btn--gold" href="/tours">View tours <Icon name="arrow" size={16} /></a>
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>
@@ -242,4 +252,15 @@ const wa = `https://wa.me/${site.whatsapp}`;
   </section>
 
   <Footer />
+
+  <script>
+    // Destination flip cards: hover flips on desktop (CSS); tap flips on touch.
+    const touch = window.matchMedia("(hover: none)").matches;
+    document.querySelectorAll(".dest[data-flip]").forEach((card) => {
+      card.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).closest("a")) return; // let the CTA link work
+        if (touch) card.classList.toggle("is-flipped");
+      });
+    });
+  </script>
 </Base>
