@@ -9,6 +9,11 @@ const wa = `https://wa.me/${site.whatsapp}`;
       <div class="footer__brand">
         <span class="brand__name">Clear Touch Tourism &amp; Services</span>
         <p>Doha-based tours, photography and videography. One trusted team for unforgettable Qatar experiences.</p>
+        <div class="footer__social">
+          <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={20} /></a>
+          <a href={site.tiktok} target="_blank" rel="noopener" aria-label="TikTok"><Icon name="tiktok" size={20} /></a>
+          <a href={wa} aria-label="WhatsApp"><Icon name="chat" size={20} /></a>
+        </div>
       </div>
       <div>
         <h5>Tours</h5>
@@ -23,6 +28,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
       <div>
         <h5>Contact</h5>
         <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+        <a href={`tel:${site.phone2Raw}`}>{site.phone2}</a>
         <a href={`mailto:${site.email}`}>{site.email}</a>
         <a href={wa}>WhatsApp</a>
         <a href="/contact">Get in touch</a>

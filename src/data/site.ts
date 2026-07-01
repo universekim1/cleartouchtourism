@@ -12,6 +12,11 @@ export const site = {
   yearsBadge: "12+",
   calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
+  phone2: "+974 5991 4706",
+  phone2Raw: "+97459914706",
+  instagram: "https://www.instagram.com/clear_touch_media",
+  tiktok: "https://www.tiktok.com/@clear_touch_media",
+  socialHandle: "@clear_touch_media",
 };
 
 export const nav = [
