@@ -407,3 +407,51 @@ ul { list-style: none; padding: 0; }
   .journey__globe { order: -1; margin-bottom: 8px; }
   .globe-wrap { width: min(78%, 340px); }
 }
+
+/* ---------- photography packages ---------- */
+.pkg-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 22px; align-items: stretch; }
+.pkg-card {
+  position: relative; display:flex; flex-direction:column;
+  background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 30px 24px; box-shadow: var(--shadow-sm);
+}
+.pkg-card--featured {
+  border:2px solid var(--gold);
+  box-shadow: 0 26px 55px -26px rgba(15,167,177,.5);
+  transform: translateY(-6px);
+}
+.pkg-badge {
+  position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); color:#04343b;
+  font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  padding:6px 14px; border-radius:999px; white-space:nowrap;
+}
+.pkg-card h3 { font-family: var(--serif); font-size:1.4rem; color: var(--ink); }
+.pkg-tagline { color: var(--ink-soft); font-size:.92rem; margin-top:4px; }
+.pkg-price { margin:16px 0 18px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+.pkg-unit { color: var(--ink-soft); font-size:.85rem; }
+.pkg-price strong { font-family: var(--serif); font-size:1.6rem; color: var(--gold-dark); }
+.pkg-features { display:flex; flex-direction:column; gap:11px; margin-bottom:24px; }
+.pkg-features li { display:flex; align-items:flex-start; gap:10px; font-size:.94rem; color: var(--ink); line-height:1.4; }
+.pkg-features li svg { color: var(--gold-dark); flex:none; margin-top:2px; }
+.pkg-cta { margin-top:auto; width:100%; justify-content:center; }
+.pkg-note { text-align:center; margin-top:30px; color: var(--ink-soft); font-size:.92rem; }
+.pkg-note strong { color: var(--ink); }
+
+/* ---------- how it works (process) ---------- */
+.process-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; }
+.process-step { position:relative; padding-top:6px; }
+.process-num {
+  font-family: var(--serif); font-size:3rem; font-weight:700; line-height:1;
+  color: var(--gold); opacity:.4; display:block; margin-bottom:8px;
+}
+.process-step h3 { font-family: var(--serif); font-size:1.25rem; color: var(--ink); margin-bottom:6px; }
+.process-step p { color: var(--ink-soft); font-size:.95rem; }
+
+@media (max-width: 900px) {
+  .pkg-grid, .process-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .pkg-card--featured { transform:none; }
+}
+@media (max-width: 560px) {
+  .pkg-grid, .process-grid { grid-template-columns: 1fr; }
+}

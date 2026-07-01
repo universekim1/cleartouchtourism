@@ -6,7 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import PageHero from "../components/PageHero.astro";
-import { site, photoServices } from "../data/site";
+import { site, photoServices, photoPackages, photoAddons, photoProcess } from "../data/site";
 import heroImg from "../assets/images/portfolio/shot-2.jpg";
 
 const portfolio = Object.values(
@@ -45,6 +45,60 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
+  <!-- ============ PACKAGES & PRICING ============ -->
+  <section class="section section--navy" id="packages">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Packages & pricing</p>
+        <h2 class="h-display">Simple, transparent packages</h2>
+        <p>Choose a starting point below — every shoot is tailored to you. Prices are indicative; message us for an exact quote.</p>
+      </div>
+      <div class="pkg-grid">
+        {photoPackages.map((p) => (
+          <article class={`pkg-card${p.featured ? " pkg-card--featured" : ""}`}>
+            {p.badge && <span class="pkg-badge">{p.badge}</span>}
+            <h3>{p.name}</h3>
+            <p class="pkg-tagline">{p.tagline}</p>
+            <div class="pkg-price">
+              {p.unit && <span class="pkg-unit">{p.unit}</span>}
+              <strong>{p.price}</strong>
+            </div>
+            <ul class="pkg-features">
+              {p.features.map((f) => (
+                <li><Icon name="check" size={16} /><span>{f}</span></li>
+              ))}
+            </ul>
+            {p.ctaType === "cal"
+              ? <a class="btn btn--gold pkg-cta" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>{p.cta} <Icon name="arrow" size={16} /></a>
+              : <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href="/contact">{p.cta} <Icon name="arrow" size={16} /></a>}
+          </article>
+        ))}
+      </div>
+      <p class="pkg-note"><strong>Add-ons:</strong> {photoAddons.join("  ·  ")}</p>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h-display">From first message to final gallery</h2>
+        <p>A calm, guided process — you show up, we handle the rest.</p>
+      </div>
+      <div class="process-grid">
+        {photoProcess.map((s) => (
+          <div class="process-step">
+            <span class="process-num">{s.step}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
   <section class="section section--navy">
     <div class="container">
       <div class="section-head">
