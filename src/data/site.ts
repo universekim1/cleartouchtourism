@@ -61,91 +61,90 @@ export const testimonials = [
 ];
 
 // ---------------------------------------------------------------------------
-// PHOTOGRAPHY PACKAGES  —  ⚠️ PLACEHOLDER PRICES/NUMBERS: replace the [ … ]
-// markers with your real figures. `featured: true` highlights a card.
+// PHOTOGRAPHY PACKAGES  (Clear Touch Media price list). `featured: true`
+// highlights a card. Weddings & commercial are quoted per job.
 // ---------------------------------------------------------------------------
 export const photoPackages = [
   {
-    name: "Portrait Session",
-    tagline: "Headshots, family & personal branding",
-    unit: "from",
-    price: "QAR [ ••• ]",
+    name: "Standard",
+    tagline: "Outdoor session",
+    unit: "",
+    price: "QAR 500",
     featured: false,
-    cta: "Enquire",
-    ctaType: "contact",
-    features: [
-      "Up to 1-hour session, 1 location",
-      "[ 15 ]+ professionally edited photos",
-      "Private online gallery to download",
-      "Print-ready high-resolution files",
-      "Outfit & location guidance",
-    ],
-  },
-  {
-    name: "Event Coverage",
-    tagline: "Corporate events, parties & conferences",
-    unit: "from",
-    price: "QAR [ ••• ]",
-    featured: false,
-    cta: "Enquire",
-    ctaType: "contact",
-    features: [
-      "Up to [ 4 ] hours of coverage",
-      "[ 150 ]+ edited photos",
-      "48–72 hour delivery",
-      "Candid, group & detail shots",
-      "Optional highlight reel add-on",
-    ],
-  },
-  {
-    name: "Wedding & Celebration",
-    tagline: "Your day, captured beautifully",
-    unit: "from",
-    price: "QAR [ ••• ]",
-    featured: true,
-    badge: "Most popular",
-    cta: "Check a date",
+    cta: "Book now",
     ctaType: "cal",
     features: [
-      "Full-day coverage, [ 2 ] shooters",
-      "Engagement mini-session included",
-      "[ 400 ]+ edited photos",
-      "Cinematic highlight film (3–5 min)",
-      "Premium album + teaser reel",
+      "Outdoor location shoot",
+      "10 professionally edited photos",
+      "1 short video",
+      "Private online gallery to download",
+      "Makeup artist available on request",
     ],
   },
   {
-    name: "Brand & Commercial",
-    tagline: "Product, campaign & content",
+    name: "Premium",
+    tagline: "Studio session",
+    unit: "",
+    price: "QAR 800",
+    featured: true,
+    badge: "Most popular",
+    cta: "Book now",
+    ctaType: "cal",
+    features: [
+      "Professional studio shoot",
+      "10 professionally edited photos",
+      "1 short video",
+      "Private online gallery to download",
+      "Makeup artist available on request",
+    ],
+  },
+  {
+    name: "Gold",
+    tagline: "Parties & events",
+    unit: "",
+    price: "QAR 1,500",
+    featured: false,
+    cta: "Book now",
+    ctaType: "cal",
+    features: [
+      "Full party / event coverage",
+      "30 professionally edited photos",
+      "1 general highlight video",
+      "Candid, group & detail shots",
+      "Makeup artist available on request",
+    ],
+  },
+  {
+    name: "Weddings & Commercial",
+    tagline: "Tailored to your event or brand",
     unit: "",
     price: "Custom quote",
     featured: false,
     cta: "Get a quote",
     ctaType: "contact",
     features: [
-      "Creative direction & shot list",
-      "Studio or on-location, anywhere in Qatar",
-      "Product, lifestyle & team imagery",
-      "Video / reels add-ons available",
+      "Full-day weddings & celebrations",
+      "Brand, product & campaign shoots",
+      "Cinematic films & social reels",
+      "Extra shooters & drone on request",
       "Full commercial usage rights",
     ],
   },
 ];
 
-// Small strip under the packages — extras clients can bolt on.
+// Extras clients can add to any package.
 export const photoAddons = [
+  "Makeup artist on request",
+  "Extra edited photos",
+  "Additional hours or locations",
   "Drone / aerial coverage",
-  "Extra hours or 2nd shooter",
-  "Express 24-hour delivery",
-  "Printed album & wall art",
-  "Hair & makeup coordination",
-  "Vertical social reels",
+  "Cinematic highlight film",
 ];
 
 // "How it works" process steps.
 export const photoProcess = [
-  { step: "01", title: "Enquire", text: "Message us your vision, dates and any references. We reply fast on WhatsApp." },
-  { step: "02", title: "Plan",    text: "We scout the location, build a shot list and lock the timeline so nothing is left to chance." },
-  { step: "03", title: "Shoot",   text: "Relax and enjoy — our crew directs and captures every moment, on location across Qatar." },
-  { step: "04", title: "Deliver", text: "Your edited gallery and films arrive in [ 5–7 ] days, ready to download and share." },
+  { step: "01", title: "Enquire", text: "Message us your vision and dates on WhatsApp or Instagram — we reply fast." },
+  { step: "02", title: "Plan",    text: "We agree the package, location and timeline — and book your makeup artist if you'd like one." },
+  { step: "03", title: "Shoot",   text: "Relax and enjoy — our crew directs and captures every moment, studio or on location." },
+  { step: "04", title: "Deliver", text: "Your professionally edited photos and video arrive in just a few days, ready to share." },
 ];

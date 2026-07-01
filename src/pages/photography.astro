@@ -51,7 +51,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
       <div class="section-head">
         <p class="eyebrow">Packages & pricing</p>
         <h2 class="h-display">Simple, transparent packages</h2>
-        <p>Choose a starting point below — every shoot is tailored to you. Prices are indicative; message us for an exact quote.</p>
+        <p>Straightforward packages for sessions across Doha — each includes professional editing and a private online gallery. Weddings, brands and events are quoted to fit.</p>
       </div>
       <div class="pkg-grid">
         {photoPackages.map((p) => (
@@ -69,7 +69,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
               ))}
             </ul>
             {p.ctaType === "cal"
-              ? <a class="btn btn--gold pkg-cta" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>{p.cta} <Icon name="arrow" size={16} /></a>
+              ? <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>{p.cta} <Icon name="arrow" size={16} /></a>
               : <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href="/contact">{p.cta} <Icon name="arrow" size={16} /></a>}
           </article>
         ))}
