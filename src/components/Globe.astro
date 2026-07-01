@@ -1,0 +1,165 @@
+---
+// Globe.astro — aerial Doha mapped on the INSIDE of a glass sphere (crystal-globe look).
+// The 360 aerial lives inside the sphere and slowly turns; a fresnel glass rim + turquoise
+// atmosphere sell the ball. Three.js, unlit. Lazy-inits, reduced-motion aware, drag to spin.
+---
+<div class="globe-wrap" data-globe>
+  <canvas class="globe-canvas" aria-hidden="true"></canvas>
+  <span class="globe-label"><span class="globe-dot"></span>Doha, Qatar</span>
+</div>
+
+<script>
+  // @ts-nocheck
+  import * as THREE from "three";
+
+  const DOHA_TEX = "/doha-aerial.jpg";
+
+  function initGlobe(wrap) {
+    const canvas = wrap.querySelector("canvas");
+    if (!canvas) { wrap.classList.add("globe--fallback"); return; }
+
+    let ctxLost = false;
+    canvas.addEventListener("webglcontextlost", () => { ctxLost = true; wrap.classList.add("globe--fallback"); });
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    } catch (e) { wrap.classList.add("globe--fallback"); return; }
+    renderer.setPixelRatio(dpr);
+
+    const size = () => canvas.offsetWidth || 400;
+    renderer.setSize(size(), size(), false);
+
+    const scene = new THREE.Scene();
+    // Wide lens + camera pushed close to the shell => we look deep INTO the sphere:
+    // a concave bowl/dome of the city that curves away from the viewer.
+    const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 100);
+    camera.position.z = 1.72;
+
+    const group = new THREE.Group();
+    group.rotation.x = 0.1;
+    scene.add(group);
+
+    // The aerial lives on the INSIDE surface of the sphere (BackSide).
+    const mat = new THREE.MeshBasicMaterial({ color: 0x0e3a4a, side: THREE.BackSide });
+    const inner = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 64), mat);
+    group.add(inner);
+
+    const loader = new THREE.TextureLoader();
+    loader.load(DOHA_TEX, (t) => {
+      t.colorSpace = THREE.SRGBColorSpace;
+      t.wrapS = THREE.RepeatWrapping;
+      t.repeat.x = -1; t.offset.x = 1; // flip so it reads correctly seen from inside
+      t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      mat.map = t;
+      mat.color.set(0xffffff);
+      mat.needsUpdate = true;
+    });
+
+    // Glass rim (fresnel) — the crystal-ball edge highlight on the near surface.
+    const glass = new THREE.Mesh(
+      new THREE.SphereGeometry(1.012, 64, 64),
+      new THREE.ShaderMaterial({
+        transparent: true, side: THREE.FrontSide, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: { c: { value: new THREE.Color(0x9fe8ef) } },
+        vertexShader: `varying float f; void main(){ vec4 mv = modelViewMatrix*vec4(position,1.0); vec3 n = normalize(normalMatrix*normal); vec3 v = normalize(-mv.xyz); f = pow(1.0 - abs(dot(n,v)), 3.0); gl_Position = projectionMatrix*mv; }`,
+        fragmentShader: `uniform vec3 c; varying float f; void main(){ gl_FragColor = vec4(c,1.0) * clamp(f,0.0,1.0); }`,
+      })
+    );
+    scene.add(glass);
+
+    // Drag to spin the inner world
+    let dragX = null;
+    canvas.style.cursor = "grab";
+    canvas.addEventListener("pointerdown", (e) => { dragX = e.clientX; canvas.style.cursor = "grabbing"; });
+    window.addEventListener("pointerup", () => { dragX = null; canvas.style.cursor = "grab"; });
+    window.addEventListener("pointermove", (e) => {
+      if (dragX === null) return;
+      group.rotation.y += (e.clientX - dragX) * 0.006;
+      dragX = e.clientX;
+    });
+
+    const onResize = () => { renderer.setSize(size(), size(), false); };
+    window.addEventListener("resize", onResize);
+
+    requestAnimationFrame(() => { canvas.style.opacity = "1"; });
+
+    function animate() {
+      if (ctxLost) return;
+      if (!reduce) group.rotation.y += 0.0016;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  const wrap = document.querySelector("[data-globe]");
+  if (wrap) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) { io.disconnect(); initGlobe(wrap); }
+      }
+    }, { rootMargin: "250px" });
+    io.observe(wrap);
+  }
+</script>
+
+<style>
+  .globe-wrap {
+    position: relative;
+    width: min(100%, 440px);
+    aspect-ratio: 1;
+    margin-inline: auto;
+  }
+  /* Concave depth: dark rim -> bright centre, like peering into a bowl/lens */
+  .globe-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(6, 24, 36, 0.35) 74%, rgba(6, 24, 36, 0.85) 100%);
+    box-shadow: inset 0 0 46px 8px rgba(6, 24, 36, 0.55);
+  }
+  .globe-canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    touch-action: pan-y;
+  }
+  .globe--fallback .globe-canvas { display: none; }
+  .globe--fallback {
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 42%, rgba(18, 192, 203, 0.45), rgba(14, 58, 74, 0.25) 55%, transparent 72%);
+  }
+  .globe-label {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: -4%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 15px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #eafcff;
+    background: rgba(8, 30, 50, 0.55);
+    border: 1px solid rgba(70, 210, 219, 0.35);
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+  }
+  .globe-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #ff7a59;
+    box-shadow: 0 0 0 4px rgba(255, 122, 89, 0.28);
+  }
+</style>

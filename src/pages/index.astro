@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
+import Globe from "../components/Globe.astro";
 import { site, offerings, photoServices, destinations, why, testimonials } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
@@ -127,6 +128,28 @@ const wa = `https://wa.me/${site.whatsapp}`;
             <a class="btn btn--outline" href="/photography">View Portfolio</a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY / GLOBE BAND ============ -->
+  <section class="journey" id="journey" aria-label="Your Qatar journey">
+    <div class="container journey__inner">
+      <div class="journey__copy">
+        <p class="eyebrow eyebrow--light">Your journey starts here</p>
+        <h2 class="h-display">It all begins in <span class="gold-word">Doha</span>.</h2>
+        <p class="journey__lede">
+          Wherever you're flying from, your Qatar adventure lands right here on the shores of
+          the Arabian Gulf. From this one city we'll take you to golden dunes, glittering
+          skylines and hidden pearls — camera in hand, every moment captured.
+        </p>
+        <div class="journey__cta">
+          <a class="btn btn--gold" href="/tours">Explore Tours <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--ghost" href={wa}>Plan my trip</a>
+        </div>
+      </div>
+      <div class="journey__globe">
+        <Globe />
       </div>
     </div>
   </section>
