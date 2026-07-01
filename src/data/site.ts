@@ -23,6 +23,7 @@ export const nav = [
   { key: "home", label: "Home", href: "/" },
   { key: "tours", label: "Tours", href: "/tours" },
   { key: "photography", label: "Photography", href: "/photography" },
+  { key: "portfolio", label: "Portfolio", href: "/portfolio" },
   { key: "about", label: "About", href: "/about" },
   { key: "contact", label: "Contact", href: "/contact" },
 ];
