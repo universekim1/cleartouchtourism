@@ -29,7 +29,18 @@ const wa = `https://wa.me/${site.whatsapp}`;
   <!-- ============ HERO ============ -->
   <section class="hero" id="home">
     <div class="hero__bg">
-      <Image src={hero} alt="Qatar landscape" widths={[800, 1400, 2000]} sizes="100vw" />
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/hero-poster.jpg"
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+      <Image src={hero} alt="Qatar tours and photography" widths={[800, 1400, 2000]} sizes="100vw" class="hero__fallback" />
     </div>
     <div class="container">
       <div class="hero__inner">
