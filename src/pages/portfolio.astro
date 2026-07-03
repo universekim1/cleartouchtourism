@@ -76,7 +76,7 @@ const cats = [
         {items.map((it, i) => (
           <button class="pf-item" data-cat={it.cat} data-full={fulls[i].src} type="button" aria-label="View image full size">
             <Image src={it.img} alt={`Clear Touch ${altFor(it.cat)} photography in Qatar`}
-                   widths={[400, 800]} sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 340px" />
+                   widths={[400, 640, 900]} sizes="(max-width:900px) 46vw, 370px" />
           </button>
         ))}
       </div>
