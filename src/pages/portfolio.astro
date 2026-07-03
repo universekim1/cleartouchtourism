@@ -7,19 +7,44 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
-import heroImg from "../assets/images/portfolio/shot-4.jpg";
+import heroImg from "../assets/images/portfolio/events-birthday-reveal.jpg";
 
 const wa = `https://wa.me/${site.whatsapp}`;
 
-// Gallery items. `cat` sets the filter bucket — adjust freely, or drop new
-// images into src/assets/images/portfolio/ and add them here.
+// Gallery images live in src/assets/images/portfolio/. The category filter is
+// derived from the filename prefix, so adding new work is easy: drop a JPG in
+// that folder named `events-*`, `portrait-*` or `travel-*` and it appears in
+// the right tab automatically. `order` below just controls the "All" mix.
 const portfolioImgs = import.meta.glob<{ default: ImageMetadata }>("../assets/images/portfolio/*.jpg", { eager: true });
-const destImgs = import.meta.glob<{ default: ImageMetadata }>("../assets/images/destinations/*.jpg", { eager: true });
 
-const items = [
-  ...Object.values(portfolioImgs).map((m, i) => ({ img: m.default, cat: i % 2 === 0 ? "events" : "portraits" })),
-  ...Object.values(destImgs).map((m) => ({ img: m.default, cat: "travel" })),
+const catFromName = (name: string): string =>
+  name.startsWith("events") ? "events" : name.startsWith("travel") ? "travel" : "portraits";
+
+const basename = (p: string) => p.split("/").pop()!.replace(/\.jpg$/i, "");
+
+// Preferred display order for "All work" — interleaves the three types so the
+// masonry reads as a varied mix rather than three grouped blocks.
+const order = [
+  "events-wedding", "portrait-blue-sequin", "travel-desert-couple",
+  "events-proposal", "portrait-maternity-couple", "travel-resort-pool",
+  "events-birthday-reveal", "portrait-staircase", "travel-desert-quad",
+  "events-birthday-portrait", "portrait-pink-dress", "portrait-couple-datenight",
 ];
+
+const byName = new Map(
+  Object.entries(portfolioImgs).map(([path, m]) => [basename(path), m.default]),
+);
+
+// Ordered names: listed ones first (in order), then any others alphabetically.
+const names = [
+  ...order.filter((n) => byName.has(n)),
+  ...[...byName.keys()].filter((n) => !order.includes(n)).sort(),
+];
+
+const items = names.map((name) => ({ img: byName.get(name)!, cat: catFromName(name) }));
+
+const altFor = (cat: string): string =>
+  cat === "events" ? "event & party" : cat === "travel" ? "travel & destination" : "portrait";
 
 // Pre-render a larger version of each image for the lightbox.
 const fulls = await Promise.all(items.map((it) => getImage({ src: it.img, width: 1600 })));
@@ -50,7 +75,7 @@ const cats = [
       <div class="pf-gallery" id="pfGallery">
         {items.map((it, i) => (
           <button class="pf-item" data-cat={it.cat} data-full={fulls[i].src} type="button" aria-label="View image full size">
-            <Image src={it.img} alt={`Clear Touch photography ${i + 1}`}
+            <Image src={it.img} alt={`Clear Touch ${altFor(it.cat)} photography in Qatar`}
                    widths={[400, 800]} sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 340px" />
           </button>
         ))}
