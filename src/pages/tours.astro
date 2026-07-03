@@ -64,7 +64,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
         {destinations.map((d) => {
           const img = destImg(d.slug);
           return (
-            <a class="dest" href="/contact">
+            <a class="dest" href={`/tours/${d.tour}`}>
               {img && <Image src={img} alt={d.name} widths={[400, 700, 1000]} sizes="(max-width:560px) 92vw, (max-width:900px) 46vw, 360px" />}
               <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
             </a>

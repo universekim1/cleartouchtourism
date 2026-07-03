@@ -45,13 +45,14 @@ export const photoServices = [
   { icon: "people", title: "Events & Portraits",   text: "Weddings, corporate events and professional portraits." },
 ];
 
+// `tour` points each destination tile at the tour page that covers it.
 export const destinations = [
-  { slug: "desert-safari",      name: "Desert Safari",         tag: "Inland Sea" },
-  { slug: "souq-waqif",         name: "Souq Waqif",            tag: "Old Doha" },
-  { slug: "the-pearl",          name: "The Pearl Island",      tag: "Marina living" },
-  { slug: "museum-islamic-art", name: "Museum of Islamic Art", tag: "Iconic landmark" },
-  { slug: "banana-island",      name: "Banana Island",         tag: "Resort escape" },
-  { slug: "katara",             name: "Katara",                tag: "Cultural village" },
+  { slug: "desert-safari",      name: "Desert Safari",         tag: "Inland Sea",      tour: "desert-safari" },
+  { slug: "souq-waqif",         name: "Souq Waqif",            tag: "Old Doha",        tour: "doha-city-tour" },
+  { slug: "the-pearl",          name: "The Pearl Island",      tag: "Marina living",   tour: "doha-city-tour" },
+  { slug: "museum-islamic-art", name: "Museum of Islamic Art", tag: "Iconic landmark", tour: "doha-city-tour" },
+  { slug: "banana-island",      name: "Banana Island",         tag: "Resort escape",   tour: "banana-island" },
+  { slug: "katara",             name: "Katara",                tag: "Cultural village",tour: "doha-city-tour" },
 ];
 
 // Individual tours with detail pages at /tours/[slug]. Pricing is quote-based
