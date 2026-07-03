@@ -64,29 +64,10 @@ const wa = `https://wa.me/${site.whatsapp}`;
           photography and videography to remember every moment. One trusted team, two ways to wow.
         </p>
         <div class="hero__cta">
-          <a class="btn btn--gold" href="/tours">Explore Tours <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--gold" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Plan My Trip <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--ghost" href="/tours">Explore Tours</a>
           <a class="btn btn--whatsapp" href={wa}>Chat on WhatsApp</a>
         </div>
-
-        <form class="booking" onsubmit="return false">
-          <div class="booking__field">
-            <label for="exp">What do you need</label>
-            <select id="exp">
-              <option>Desert Safari</option>
-              <option>Doha City Tour</option>
-              <option>Dhow Cruise</option>
-              <option>Photography Session</option>
-              <option>Video / Reel Shoot</option>
-            </select>
-          </div>
-          <div class="booking__field">
-            <label for="guests">Guests</label>
-            <select id="guests"><option>2 Guests</option><option>1 Guest</option><option>3–4 Guests</option><option>5+ Guests</option></select>
-          </div>
-          <div class="booking__submit">
-            <a class="btn btn--gold" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Check live availability — pick a date &amp; time →</a>
-          </div>
-        </form>
       </div>
     </div>
   </section>
