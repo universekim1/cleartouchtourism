@@ -5,9 +5,8 @@ import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
-import Vehicles from "../components/Vehicles.astro";
 import PageHero from "../components/PageHero.astro";
-import { site, offerings, destinations } from "../data/site";
+import { site, tours, destinations } from "../data/site";
 import heroImg from "../assets/images/destinations/desert-safari.jpg";
 
 const destImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -27,25 +26,27 @@ const wa = `https://wa.me/${site.whatsapp}`;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">What we offer</p>
-        <h2 class="h-display">Our experiences</h2>
+        <h2 class="h-display">Our signature tours</h2>
         <p>Pick a signature experience below, or tell us your dream and we'll build it around you.</p>
       </div>
       <div class="grid-3">
-        {offerings.map((o) => {
-          const img = o.img ? destImg(o.img) : undefined;
+        {tours.map((t) => {
+          const img = destImg(t.img);
           return (
-            <article class="offer-card">
-              <div class="offer-card__media">
-                {o.vehicles
-                  ? <Vehicles />
-                  : (img && <Image src={img} alt={o.title} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
+            <a class="tour-card" href={`/tours/${t.slug}`}>
+              <div class="tour-card__media">
+                {img && <Image src={img} alt={t.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
+                <span class="tour-card__price">{t.groupSize}</span>
               </div>
-              <div class="offer-card__body">
-                <div class="card__icon"><Icon name={o.icon} /></div>
-                <h3>{o.title}</h3>
-                <p>{o.text}</p>
+              <div class="tour-card__body">
+                <h3>{t.name}</h3>
+                <p>{t.tagline}</p>
+                <div class="tour-card__meta">
+                  <span><Icon name="clock" size={15} /> {t.duration}</span>
+                  <span class="tour-card__more">View details <Icon name="arrow" size={15} /></span>
+                </div>
               </div>
-            </article>
+            </a>
           );
         })}
       </div>

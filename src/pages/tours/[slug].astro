@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Icon from "../../components/Icon.astro";
+import PageHero from "../../components/PageHero.astro";
+import { site, tours } from "../../data/site";
+
+export function getStaticPaths() {
+  return tours.map((t) => ({ params: { slug: t.slug }, props: { tour: t } }));
+}
+const { tour } = Astro.props;
+const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi Clear Touch! I'd like to book the ${tour.name}.`)}`;
+
+const destImages = import.meta.glob<{ default: ImageMetadata }>("../../assets/images/destinations/*.jpg", { eager: true });
+const img = (slug: string) => destImages[`../../assets/images/destinations/${slug}.jpg`]?.default;
+const heroImg = img(tour.img);
+const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
+---
+<Base title={`${tour.name} — Clear Touch Tours`} description={tour.tagline}>
+  <Header active="tours" />
+
+  {heroImg && <PageHero image={heroImg} eyebrow="Tour" title={tour.name} subtitle={tour.tagline} />}
+
+  <section class="section section--cream">
+    <div class="container tour-detail">
+      <div class="tour-detail__main">
+        <div class="tour-facts">
+          <span><Icon name="clock" size={18} /> {tour.duration}</span>
+          <span><Icon name="people" size={18} /> {tour.groupSize}</span>
+          <span><Icon name="tag" size={18} /> Tailored quote</span>
+        </div>
+
+        <h2 class="h-display">Overview</h2>
+        <p class="prose">{tour.overview}</p>
+
+        <h3 class="tour-sub">Highlights</h3>
+        <ul class="tour-checks">
+          {tour.highlights.map((h) => <li><Icon name="check" size={16} /><span>{h}</span></li>)}
+        </ul>
+
+        <div class="tour-inex">
+          <div>
+            <h3 class="tour-sub">What's included</h3>
+            <ul class="tour-checks">
+              {tour.includes.map((h) => <li><Icon name="check" size={16} /><span>{h}</span></li>)}
+            </ul>
+          </div>
+          <div>
+            <h3 class="tour-sub">Not included</h3>
+            <ul class="tour-checks tour-checks--x">
+              {tour.excludes.map((h) => <li><span class="x">&times;</span><span>{h}</span></li>)}
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="tour-sub">Itinerary</h3>
+        <ol class="tour-timeline">
+          {tour.itinerary.map((s) => (
+            <li>
+              <span class="tour-timeline__time">{s.time}</span>
+              <h4>{s.title}</h4>
+              <p>{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <aside class="tour-book">
+        <div class="tour-book__card">
+          <span class="tour-book__from">Pricing</span>
+          <div class="tour-book__price">Tailored quote</div>
+          <p class="tour-book__quote">Priced around your group, season and any add-ons — get yours in minutes.</p>
+          <ul class="tour-book__facts">
+            <li><Icon name="clock" size={16} /> {tour.duration}</li>
+            <li><Icon name="people" size={16} /> {tour.groupSize}</li>
+          </ul>
+          <a class="btn btn--gold tour-book__cta" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Check availability <Icon name="arrow" size={17} /></a>
+          <a class="btn btn--whatsapp tour-book__cta" href={wa}>Book on WhatsApp</a>
+          <p class="tour-book__note">Fast confirmation · Real people on WhatsApp 24/7</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {tour.gallery && tour.gallery.length > 0 && (
+    <section class="section section--navy">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Gallery</p>
+          <h2 class="h-display">A glimpse of the experience</h2>
+        </div>
+        <div class="gallery">
+          {tour.gallery.map((g, i) => {
+            const gi = img(g);
+            return gi && <Image src={gi} alt={`${tour.name} ${i + 1}`} widths={[400, 800]} sizes="(max-width:900px) 50vw, 360px" />;
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Keep exploring</p>
+        <h2 class="h-display">Other tours you'll love</h2>
+      </div>
+      <div class="grid-3">
+        {others.map((t) => {
+          const ti = img(t.img);
+          return (
+            <a class="tour-card" href={`/tours/${t.slug}`}>
+              <div class="tour-card__media">
+                {ti && <Image src={ti} alt={t.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
+                <span class="tour-card__price">{t.groupSize}</span>
+              </div>
+              <div class="tour-card__body">
+                <h3>{t.name}</h3>
+                <p>{t.tagline}</p>
+                <div class="tour-card__meta">
+                  <span><Icon name="clock" size={15} /> {t.duration}</span>
+                  <span class="tour-card__more">View details <Icon name="arrow" size={15} /></span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
