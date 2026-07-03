@@ -215,6 +215,9 @@ ul { list-style: none; padding: 0; }
 /* ---------- destinations gallery (3D flip cards) ---------- */
 .dest-grid { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
 .dest { position: relative; aspect-ratio: 4/5; perspective: 1100px; cursor: pointer; }
+/* Plain (non-flip) dest tiles, e.g. on /tours: crop the bare img to the tile */
+.dest > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius: var(--radius); }
+.dest > img ~ .dest__label { background: linear-gradient(transparent, rgba(4,32,42,.75)); border-radius: 0 0 var(--radius) var(--radius); }
 .dest__inner {
   position:absolute; inset:0; transform-style: preserve-3d;
   transition: transform .7s cubic-bezier(.4,.1,.2,1);
