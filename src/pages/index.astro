@@ -37,11 +37,24 @@ const wa = `https://wa.me/${site.whatsapp}`;
         playsinline
         preload="metadata"
         poster="/hero-poster.jpg"
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
+        data-src-wide="/hero-wide.mp4"
+        data-src-tall="/hero.mp4"
+      ></video>
       <Image src={hero} alt="Qatar tours and photography" widths={[800, 1400, 2000]} sizes="100vw" class="hero__fallback" />
     </div>
+    <script is:inline>
+      (function () {
+        var v = document.querySelector(".hero__video");
+        if (!v) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var wide = window.matchMedia("(min-width: 900px)").matches;
+        var s = document.createElement("source");
+        s.src = wide ? v.dataset.srcWide : v.dataset.srcTall;
+        s.type = "video/mp4";
+        v.appendChild(s);
+        v.load();
+      })();
+    </script>
     <div class="container">
       <div class="hero__inner">
         <span class="badge">★ Qatar's trusted tours & creative studio</span>
