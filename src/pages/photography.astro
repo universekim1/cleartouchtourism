@@ -45,13 +45,17 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ PACKAGES & PRICING ============ -->
+  <!-- ============ SESSION TYPES ============
+       Prices & direct booking intentionally removed 2026-07-04 while photography
+       is added to the company CR (registered activity). Data (prices/cal CTAs)
+       kept in site.ts — restore the price block + Cal.com CTAs once the CR
+       amendment + Ministry of Culture studio licence are approved. -->
   <section class="section section--navy" id="packages">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Packages & pricing</p>
-        <h2 class="h-display">Simple, transparent packages</h2>
-        <p>Straightforward packages for sessions across Doha — each includes professional editing and a private online gallery. Weddings, brands and events are quoted to fit.</p>
+        <p class="eyebrow">What we offer</p>
+        <h2 class="h-display">Ways to work together</h2>
+        <p>From outdoor and studio sessions to full event, wedding and brand coverage — every shoot includes professional editing and a private online gallery. Tell us about your day and we'll tailor the details to fit.</p>
       </div>
       <div class="pkg-grid">
         {photoPackages.map((p) => (
@@ -59,18 +63,12 @@ const wa = `https://wa.me/${site.whatsapp}`;
             {p.badge && <span class="pkg-badge">{p.badge}</span>}
             <h3>{p.name}</h3>
             <p class="pkg-tagline">{p.tagline}</p>
-            <div class="pkg-price">
-              {p.unit && <span class="pkg-unit">{p.unit}</span>}
-              <strong>{p.price}</strong>
-            </div>
             <ul class="pkg-features">
               {p.features.map((f) => (
                 <li><Icon name="check" size={16} /><span>{f}</span></li>
               ))}
             </ul>
-            {p.ctaType === "cal"
-              ? <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>{p.cta} <Icon name="arrow" size={16} /></a>
-              : <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href="/contact">{p.cta} <Icon name="arrow" size={16} /></a>}
+            <a class={`btn pkg-cta ${p.featured ? "btn--gold" : "btn--outline"}`} href="/contact">Enquire <Icon name="arrow" size={16} /></a>
           </article>
         ))}
       </div>
@@ -121,7 +119,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
         <h2>Have a shoot in mind?</h2>
         <p>Weddings, events, brand campaigns or travel content — let's create something beautiful.</p>
         <div class="hero__cta">
-          <a class="btn btn--white" href={wa}>Book a shoot</a>
+          <a class="btn btn--white" href={wa}>Enquire about a shoot</a>
           <a class="btn btn--ghost" href="/contact">Contact us</a>
         </div>
       </div>
