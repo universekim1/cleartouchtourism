@@ -7,8 +7,9 @@ export const site = {
   whatsapp: "97455484718",
   email: "bookings@cleartouchtourism.com",
   location: "Doha, Qatar",
-  // googleReviewUrl: fill in once the Google Business Profile is claimed —
-  // the "Ask for reviews" share link. Real reviews only; never invent stats.
+  // Google Business Profile — "Ask for reviews" share link + Place ID.
+  googleReviewUrl: "https://g.page/r/CZWJda8heIGeEBM/review",
+  googlePlaceId: "ChIJD92iwbDFRT4RlYl1ryF4gZ4",
   calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   phone2: "+974 5991 4706",

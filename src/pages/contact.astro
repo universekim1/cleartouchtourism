@@ -41,6 +41,10 @@ const wa = `https://wa.me/${site.whatsapp}`;
               <div class="feature__icon"><Icon name="pin" size={22} /></div>
               <div><h4>Location</h4><span>{site.location}</span></div>
             </div>
+            <div class="contact-item">
+              <div class="feature__icon"><Icon name="star" size={22} /></div>
+              <div><h4>Reviews</h4><a href={site.googleReviewUrl} target="_blank" rel="noopener">Review us on Google</a></div>
+            </div>
           </div>
         </div>
 
@@ -67,6 +71,18 @@ const wa = `https://wa.me/${site.whatsapp}`;
               Send via WhatsApp <Icon name="arrow" size={18} />
             </button>
           </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container">
+      <div class="cta-band">
+        <h2>Enjoyed working with us?</h2>
+        <p>A quick Google review means the world to a local Doha team — and helps other travellers find us.</p>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href={site.googleReviewUrl} target="_blank" rel="noopener">★ Leave a Google review</a>
         </div>
       </div>
     </div>
