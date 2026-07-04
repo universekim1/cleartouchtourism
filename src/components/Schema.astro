@@ -1,0 +1,70 @@
+---
+// Site-wide structured data (JSON-LD) for local + AI search.
+// NOTE: intentionally NO `aggregateRating` / `review` here. Fake or
+// unverifiable review markup risks a Google manual action. Add aggregateRating
+// ONLY with real Google-checkable reviews (see testimonials note in site.ts).
+import { site } from "../data/site";
+
+const origin = "https://cleartouchtourism.com";
+
+const business = {
+  "@type": ["LocalBusiness", "TravelAgency"],
+  "@id": `${origin}/#business`,
+  name: site.fullName,
+  alternateName: "Clear Touch Media",
+  url: origin,
+  image: `${origin}/hero-poster.jpg`,
+  logo: `${origin}/hero-poster.jpg`,
+  description:
+    "Doha-based tour operator and creative studio — hand-crafted Qatar tours, desert safaris and dhow cruises, plus professional photography and videography for travel, events, weddings and portraits.",
+  telephone: site.phoneRaw,
+  email: site.email,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Doha",
+    addressCountry: "QA",
+  },
+  // Service-area business — we come to you across Qatar.
+  areaServed: { "@type": "Country", name: "Qatar" },
+  geo: { "@type": "GeoCoordinates", latitude: 25.2854, longitude: 51.531 },
+  sameAs: [site.instagram, site.tiktok],
+  makesOffer: [
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Photography & Videography",
+        serviceType: "Photographer",
+        description:
+          "Travel and destination imagery, cinematic films and reels, weddings, corporate events and professional portraits in Doha, Qatar.",
+        areaServed: { "@type": "Country", name: "Qatar" },
+        provider: { "@id": `${origin}/#business` },
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Qatar Tours & Experiences",
+        serviceType: "Tour operator",
+        description:
+          "Desert safaris, Doha city tours, dhow cruises and Banana Island escapes with a trusted local team.",
+        areaServed: { "@type": "Country", name: "Qatar" },
+        provider: { "@id": `${origin}/#business` },
+      },
+    },
+  ],
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": `${origin}/#website`,
+  url: origin,
+  name: site.fullName,
+  publisher: { "@id": `${origin}/#business` },
+};
+
+const graph = { "@context": "https://schema.org", "@graph": [business, website] };
+---
+<script type="application/ld+json" set:html={JSON.stringify(graph)} is:inline />

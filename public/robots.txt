@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# AI answer engines — explicitly welcome (see ai-seo)
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://cleartouchtourism.com/sitemap-index.xml

@@ -7,7 +7,7 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
 import Globe from "../components/Globe.astro";
-import { site, offerings, photoServices, destinations, why, testimonials } from "../data/site";
+import { site, offerings, photoServices, destinations, why } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
 import about from "../assets/images/about.jpg";
@@ -216,7 +216,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
       <div class="split split--reverse">
         <div class="media-frame">
           <Image src={about} alt="Doha skyline at dusk" widths={[600, 1000]} sizes="(max-width:900px) 100vw, 540px" />
-          <div class="stat-badge"><strong>{site.yearsBadge}</strong><span>years creating Qatar memories</span></div>
+          <div class="stat-badge"><strong>100%</strong><span>local Doha team</span></div>
         </div>
         <div>
           <p class="eyebrow">Why Clear Touch</p>
@@ -238,28 +238,10 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ TESTIMONIALS ============ -->
-  <section class="section section--navy" id="reviews">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Loved by travellers</p>
-        <h2 class="h-display">What our guests say</h2>
-        <p>Rated {site.rating}/5 across Google, TripAdvisor & GetYourGuide.</p>
-      </div>
-      <div class="tgrid">
-        {testimonials.map((t) => (
-          <div class="tcard">
-            <div class="stars">★★★★★</div>
-            <blockquote>“{t.quote}”</blockquote>
-            <div class="tcard__who">
-              <div class="avatar">{t.initial}</div>
-              <div><b>{t.name}</b><span>{t.place}</span></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- ============ TESTIMONIALS ============
+       Section removed 2026-07-04 (entries were placeholders, not real clients).
+       Re-add with verbatim Google reviews once the Business Profile is live —
+       render from `testimonials` in site.ts. -->
 
   <!-- ============ CTA BAND ============ -->
   <section class="section section--cream" id="contact">

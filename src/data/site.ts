@@ -5,11 +5,10 @@ export const site = {
   phone: "+974 5548 4718",
   phoneRaw: "+97455484718",
   whatsapp: "97455484718",
-  email: "bookings@cleartouchmedia.com",
+  email: "bookings@cleartouchtourism.com",
   location: "Doha, Qatar",
-  rating: "4.9",
-  reviewCount: "2,800+",
-  yearsBadge: "12+",
+  // googleReviewUrl: fill in once the Google Business Profile is claimed —
+  // the "Ask for reviews" share link. Real reviews only; never invent stats.
   calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   phone2: "+974 5991 4706",
@@ -171,10 +170,10 @@ export const why = [
   { icon: "chat",    title: "24/7 human support",   text: "Real people on WhatsApp whenever you need us." },
 ];
 
-export const testimonials = [
-  { quote: "The desert safari to the Inland Sea was the highlight of our trip! Pickup was on time, the dune bashing was thrilling and the BBQ dinner was delicious. Clear Touch took care of everything.", name: "Sophie M.", place: "🇬🇧 United Kingdom", initial: "S" },
-  { quote: "Booked the Doha city tour and the dhow cruise. Seamless from start to finish and the best price I found anywhere. Our guide was friendly and super knowledgeable about Souq Waqif.", name: "Arjun P.", place: "🇮🇳 India", initial: "A" },
-];
+// Testimonials removed 2026-07-04: the previous entries were placeholders, not
+// real clients. Re-add ONLY verbatim quotes from real Google reviews once the
+// Google Business Profile is live (keep name + rating checkable on Google).
+export const testimonials: { quote: string; name: string; place: string; initial: string }[] = [];
 
 // ---------------------------------------------------------------------------
 // PHOTOGRAPHY PACKAGES  (Clear Touch Media price list). `featured: true`

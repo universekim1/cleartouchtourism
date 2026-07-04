@@ -1,11 +1,16 @@
 ---
 import "../styles/global.css";
 import { site } from "../data/site";
-interface Props { title?: string; description?: string; }
+import Schema from "../components/Schema.astro";
+interface Props { title?: string; description?: string; image?: string; }
 const {
   title = `${site.fullName} — Doha Tourism, Photography & Videography`,
   description = "Qatar's trusted tour operator and creative studio. Hand-crafted Doha tours, desert safaris and dhow cruises, plus professional travel photography and videography.",
+  image = "/hero-poster.jpg",
 } = Astro.props;
+// Absolute URLs (require `site` in astro.config.mjs).
+const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, "") || Astro.site?.href;
+const ogImage = new URL(image, Astro.site).href;
 ---
 <!doctype html>
 <html lang="en-US">
@@ -14,6 +19,21 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.fullName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <Schema />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
