@@ -107,7 +107,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
               <div class="offer-card__media">
                 {o.vehicles
                   ? <Vehicles />
-                  : (img && <Image src={img} alt={o.title} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
+                  : (img && <Image src={img} alt={o.title} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
               </div>
               <div class="offer-card__body">
                 <div class="card__icon"><Icon name={o.icon} /></div>
@@ -128,7 +128,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
         <div class="photo-mosaic">
           {portfolio.slice(0, 5).map((p, i) => (
             <Image src={p} alt={`Clear Touch photography ${i + 1}`} class={i === 0 ? "tall" : ""}
-                   widths={[400, 700]} sizes="(max-width:900px) 50vw, 280px" />
+                   width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 280px" />
           ))}
         </div>
         <div>
@@ -193,13 +193,13 @@ const wa = `https://wa.me/${site.whatsapp}`;
             <div class="dest" data-flip>
               <div class="dest__inner">
                 <div class="dest__face dest__front">
-                  {img && <Image src={img} alt={d.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
+                  {img && <Image src={img} alt={d.name} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
                   <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
                   <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
                 </div>
                 <div class="dest__face dest__back">
                   <span class="dest__tag">{d.tag}</span>
-                  <h3>{d.name}</h3>
+                  <p class="dest__back-name">{d.name}</p>
                   <a class="btn btn--gold" href={`/tours/${d.tour}`}>View tour <Icon name="arrow" size={16} /></a>
                 </div>
               </div>
@@ -215,7 +215,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
     <div class="container">
       <div class="split split--reverse">
         <div class="media-frame">
-          <Image src={about} alt="Doha skyline at dusk" widths={[600, 1000]} sizes="(max-width:900px) 100vw, 540px" />
+          <Image src={about} alt="Doha skyline at dusk" width={1000} widths={[600, 1000]} sizes="(max-width:900px) 100vw, 540px" />
           <div class="stat-badge"><strong>100%</strong><span>local Doha team</span></div>
         </div>
         <div>

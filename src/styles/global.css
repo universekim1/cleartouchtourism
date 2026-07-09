@@ -318,7 +318,7 @@ ul { list-style: none; padding: 0; }
 }
 .dest__back .dest__tag { font-size:.8rem; color: var(--gold-light);
   text-transform:uppercase; letter-spacing:.06em; font-weight:600; }
-.dest__back h3 { font-family: var(--serif); font-size:1.6rem; line-height:1.15; }
+.dest__back .dest__back-name { font-family: var(--serif); font-size:1.6rem; line-height:1.15; margin:0; font-weight:700; }
 .dest__back .btn { align-self:flex-start; margin-top:8px; }
 
 /* ---------- photography pillar (split) ---------- */
