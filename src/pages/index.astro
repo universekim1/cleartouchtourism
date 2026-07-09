@@ -91,41 +91,6 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ EXPERIENCES & DESTINATIONS (merged, flip cards) ============ -->
-  <section class="section section--cream" id="tours">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What we offer &amp; where we'll take you</p>
-        <h2 class="h-display">Unforgettable Experiences</h2>
-        <p>From golden dunes to glittering skylines — nine signature experiences and destinations across Qatar.</p>
-      </div>
-      <div class="dest-grid">
-        {experiences.map((e) => {
-          const img = e.img ? destImg(e.img) : undefined;
-          return (
-            <div class="dest" data-flip>
-              <div class="dest__inner">
-                <div class="dest__face dest__front">
-                  {e.vehicles
-                    ? <Vehicles />
-                    : (img && <Image src={img} alt={e.title} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
-                  <div class="dest__label"><h3>{e.title}</h3><span>{e.tag}</span></div>
-                  <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
-                </div>
-                <div class="dest__face dest__back">
-                  <span class="dest__tag">{e.tag}</span>
-                  <p class="dest__back-name">{e.title}</p>
-                  <p class="dest__back-text">{e.text}</p>
-                  <a class="btn btn--gold" href={e.href}>{e.cta} <Icon name="arrow" size={16} /></a>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-
   <!-- ============ PHOTOGRAPHY & VIDEO PILLAR (equal billing) ============ -->
   <section class="section section--navy" id="photography">
     <div class="container">
@@ -157,6 +122,41 @@ const wa = `https://wa.me/${site.whatsapp}`;
             <a class="btn btn--outline" href="/portfolio">View Portfolio</a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCES & DESTINATIONS (merged, flip cards) ============ -->
+  <section class="section section--cream" id="tours">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we offer &amp; where we'll take you</p>
+        <h2 class="h-display">Unforgettable Experiences</h2>
+        <p>From golden dunes to glittering skylines — nine signature experiences and destinations across Qatar.</p>
+      </div>
+      <div class="dest-grid">
+        {experiences.map((e) => {
+          const img = e.img ? destImg(e.img) : undefined;
+          return (
+            <div class="dest" data-flip>
+              <div class="dest__inner">
+                <div class="dest__face dest__front">
+                  {e.vehicles
+                    ? <Vehicles />
+                    : (img && <Image src={img} alt={e.title} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
+                  <div class="dest__label"><h3>{e.title}</h3><span>{e.tag}</span></div>
+                  <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
+                </div>
+                <div class="dest__face dest__back">
+                  <span class="dest__tag">{e.tag}</span>
+                  <p class="dest__back-name">{e.title}</p>
+                  <p class="dest__back-text">{e.text}</p>
+                  <a class="btn btn--gold" href={e.href}>{e.cta} <Icon name="arrow" size={16} /></a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
