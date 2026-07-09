@@ -10,6 +10,8 @@ export const site = {
   // Google Business Profile — "Ask for reviews" share link + Place ID.
   googleReviewUrl: "https://g.page/r/CZWJda8heIGeEBM/review",
   googlePlaceId: "ChIJD92iwbDFRT4RlYl1ryF4gZ4",
+  // Public Maps listing — "read all reviews" links.
+  googleMapsUrl: "https://www.google.com/maps/place/?q=place_id:ChIJD92iwbDFRT4RlYl1ryF4gZ4",
   calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   phone2: "+974 5991 4706",
@@ -171,10 +173,36 @@ export const why = [
   { icon: "chat",    title: "24/7 human support",   text: "Real people on WhatsApp whenever you need us." },
 ];
 
-// Testimonials removed 2026-07-04: the previous entries were placeholders, not
-// real clients. Re-add ONLY verbatim quotes from real Google reviews once the
-// Google Business Profile is live (keep name + rating checkable on Google).
-export const testimonials: { quote: string; name: string; place: string; initial: string }[] = [];
+// Real Google reviews (added 2026-07-09) — quotes are VERBATIM from the
+// public listing (typos and all) so every entry stays checkable on Google
+// via site.googleMapsUrl. Do not edit the wording; swap entries only for
+// other real reviews.
+export const testimonials: { quote: string; name: string; place: string; initial: string }[] = [
+  {
+    quote: "Best photographers in Qatar",
+    name: "Julian Nalubega",
+    place: "Google review",
+    initial: "J",
+  },
+  {
+    quote: "most professional people i know made my birthday a movie,u highly recommed,forever in my heart",
+    name: "Ann Muthoni",
+    place: "Google review",
+    initial: "A",
+  },
+  {
+    quote: "Had a great tour with great photos and videos for my memories",
+    name: "Lydia Henrietta Atuhairwe",
+    place: "Google review",
+    initial: "L",
+  },
+  {
+    quote: "I had the best experience with Clear touch and services",
+    name: "Elesu Edrian",
+    place: "Google review",
+    initial: "E",
+  },
+];
 
 // ---------------------------------------------------------------------------
 // PHOTOGRAPHY PACKAGES  (Clear Touch Media price list). `featured: true`

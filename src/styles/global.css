@@ -355,6 +355,9 @@ ul { list-style: none; padding: 0; }
   color:#04343b; font-weight:800; display:grid; place-items:center; }
 .tcard__who b { display:block; }
 .tcard__who span { font-size:.86rem; color:var(--ink-soft); }
+.treviews-link { text-align:center; margin-top:28px; }
+.treviews-link a { color:var(--ink); font-weight:700; text-decoration:none; border-bottom:2px solid var(--gold); padding-bottom:2px; }
+.treviews-link a:hover { color:var(--gold-dark); }
 
 /* ---------- CTA band ---------- */
 .cta-band { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color:#fff; border-radius: var(--radius-lg);

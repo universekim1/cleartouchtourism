@@ -7,7 +7,7 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
 import Globe from "../components/Globe.astro";
-import { site, offerings, photoServices, destinations, why } from "../data/site";
+import { site, offerings, photoServices, destinations, why, testimonials } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
 import about from "../assets/images/about.jpg";
@@ -239,9 +239,31 @@ const wa = `https://wa.me/${site.whatsapp}`;
   </section>
 
   <!-- ============ TESTIMONIALS ============
-       Section removed 2026-07-04 (entries were placeholders, not real clients).
-       Re-add with verbatim Google reviews once the Business Profile is live —
-       render from `testimonials` in site.ts. -->
+       Verbatim quotes from real Google reviews (see testimonials in site.ts). -->
+  <section class="section section--navy" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Loved by our guests</p>
+        <h2 class="h-display">What our guests say</h2>
+        <p>Rated <b>5.0</b> <span class="rating">★★★★★</span> on Google.</p>
+      </div>
+      <div class="tgrid">
+        {testimonials.map((t) => (
+          <div class="tcard">
+            <div class="stars">★★★★★</div>
+            <blockquote>“{t.quote}”</blockquote>
+            <div class="tcard__who">
+              <div class="avatar">{t.initial}</div>
+              <div><b>{t.name}</b><span>{t.place}</span></div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="treviews-link">
+        <a href={site.googleMapsUrl} target="_blank" rel="noopener">Read all our reviews on Google →</a>
+      </p>
+    </div>
+  </section>
 
   <!-- ============ CTA BAND ============ -->
   <section class="section section--cream" id="contact">
