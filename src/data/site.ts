@@ -57,6 +57,21 @@ export const destinations = [
   { slug: "katara",             name: "Katara",                tag: "Cultural village",tour: "doha-city-tour" },
 ];
 
+// Merged homepage grid: offerings + destinations as one flip-card set, one
+// card per photo (no repeats). `href` is the tour page that covers it, or
+// /contact for services. `vehicles: true` renders the van+car SVG instead of a photo.
+export const experiences = [
+  { img: "desert-safari",      title: "Desert Safaris",        tag: "Inland Sea",        text: "Dune bashing, camel rides & BBQ dinners by the Inland Sea.",                       href: "/tours/desert-safari",  cta: "View tour" },
+  { img: "souq-waqif",         title: "City & Culture",        tag: "Old Doha & beyond", text: "Souq Waqif, Katara & the National Museum of Qatar.",                               href: "/tours/doha-city-tour", cta: "View tour" },
+  { img: "cruises",            title: "Cruises & Dining",      tag: "On the water",      text: "Traditional dhow & luxury yacht cruises on the Corniche.",                         href: "/tours/dhow-cruise",    cta: "View tour" },
+  { img: "the-pearl",          title: "The Pearl Island",      tag: "Marina living",     text: "Waterfront promenades, marinas and boutique shopping on Doha's man-made island.", href: "/tours/doha-city-tour", cta: "View tour" },
+  { img: "banana-island",      title: "Island & Beach",        tag: "Resort escape",     text: "Banana Island escapes & pristine Gulf getaways.",                                 href: "/tours/banana-island",  cta: "View tour" },
+  { img: "museum-islamic-art", title: "Museum of Islamic Art", tag: "Iconic landmark",   text: "I.M. Pei's masterpiece on the Corniche — art spanning 1,400 years.",              href: "/tours/doha-city-tour", cta: "View tour" },
+  { img: "katara",             title: "Katara",                tag: "Cultural village",  text: "Amphitheatres, galleries and beachside dining in the cultural village.",          href: "/tours/doha-city-tour", cta: "View tour" },
+  { img: "visa-welcome",       title: "Visa Services",         tag: "Travel made easy",  text: "Fast, hassle-free Qatar tourist visa processing.",                                href: "/contact",              cta: "Enquire" },
+  { vehicles: true,            title: "Airport Transfers",     tag: "Door to door",      text: "Private transfers and group vans from Hamad International, around the clock.",    href: "/contact",              cta: "Enquire" },
+];
+
 // Individual tours with detail pages at /tours/[slug]. Pricing is quote-based
 // (tailored per group/season) — no public numbers, matching the rest of the site.
 export const tours = [

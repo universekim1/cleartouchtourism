@@ -7,7 +7,7 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
 import Globe from "../components/Globe.astro";
-import { site, offerings, photoServices, destinations, why, testimonials } from "../data/site";
+import { site, experiences, photoServices, why, testimonials } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
 import about from "../assets/images/about.jpg";
@@ -91,30 +91,35 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ TOURS / OFFERINGS ============ -->
+  <!-- ============ EXPERIENCES & DESTINATIONS (merged, flip cards) ============ -->
   <section class="section section--cream" id="tours">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">What we offer</p>
+        <p class="eyebrow">What we offer &amp; where we'll take you</p>
         <h2 class="h-display">Unforgettable Experiences</h2>
-        <p>From golden dunes to glittering skylines — pick your perfect Qatar adventure.</p>
+        <p>From golden dunes to glittering skylines — nine signature experiences and destinations across Qatar.</p>
       </div>
-      <div class="grid-3">
-        {offerings.map((o) => {
-          const img = o.img ? destImg(o.img) : undefined;
+      <div class="dest-grid">
+        {experiences.map((e) => {
+          const img = e.img ? destImg(e.img) : undefined;
           return (
-            <article class="offer-card">
-              <div class="offer-card__media">
-                {o.vehicles
-                  ? <Vehicles />
-                  : (img && <Image src={img} alt={o.title} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
+            <div class="dest" data-flip>
+              <div class="dest__inner">
+                <div class="dest__face dest__front">
+                  {e.vehicles
+                    ? <Vehicles />
+                    : (img && <Image src={img} alt={e.title} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />)}
+                  <div class="dest__label"><h3>{e.title}</h3><span>{e.tag}</span></div>
+                  <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
+                </div>
+                <div class="dest__face dest__back">
+                  <span class="dest__tag">{e.tag}</span>
+                  <p class="dest__back-name">{e.title}</p>
+                  <p class="dest__back-text">{e.text}</p>
+                  <a class="btn btn--gold" href={e.href}>{e.cta} <Icon name="arrow" size={16} /></a>
+                </div>
               </div>
-              <div class="offer-card__body">
-                <div class="card__icon"><Icon name={o.icon} /></div>
-                <h3>{o.title}</h3>
-                <p>{o.text}</p>
-              </div>
-            </article>
+            </div>
           );
         })}
       </div>
@@ -174,38 +179,6 @@ const wa = `https://wa.me/${site.whatsapp}`;
       </div>
       <div class="journey__globe">
         <Globe />
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ DESTINATIONS GALLERY ============ -->
-  <section class="section section--cream" id="destinations">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Where we'll take you</p>
-        <h2 class="h-display">Popular Destinations</h2>
-        <p>Nine signature locations across Qatar, each with its own story to tell.</p>
-      </div>
-      <div class="dest-grid">
-        {destinations.map((d) => {
-          const img = destImg(d.slug);
-          return (
-            <div class="dest" data-flip>
-              <div class="dest__inner">
-                <div class="dest__face dest__front">
-                  {img && <Image src={img} alt={d.name} width={700} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
-                  <div class="dest__label"><h3>{d.name}</h3><span>{d.tag}</span></div>
-                  <span class="dest__flip-hint"><Icon name="arrow" size={16} /></span>
-                </div>
-                <div class="dest__face dest__back">
-                  <span class="dest__tag">{d.tag}</span>
-                  <p class="dest__back-name">{d.name}</p>
-                  <a class="btn btn--gold" href={`/tours/${d.tour}`}>View tour <Icon name="arrow" size={16} /></a>
-                </div>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   </section>
