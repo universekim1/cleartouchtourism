@@ -36,7 +36,7 @@ const wa = `https://wa.me/${site.whatsapp}`;
             <a class="tour-card" href={`/tours/${t.slug}`}>
               <div class="tour-card__media">
                 {img && <Image src={img} alt={t.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
-                <span class="tour-card__price">{t.groupSize}</span>
+                <span class="tour-card__price">From QAR {t.from}</span>
               </div>
               <div class="tour-card__body">
                 <h3>{t.name}</h3>
