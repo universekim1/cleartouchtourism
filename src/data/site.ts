@@ -72,11 +72,27 @@ export const experiences = [
   { vehicles: true,            title: "Airport Transfers",     tag: "Door to door",      text: "Private transfers and group vans from Hamad International, around the clock.",    href: "/contact",              cta: "Enquire" },
 ];
 
-// Individual tours with detail pages at /tours/[slug]. Pricing is quote-based
-// (tailored per group/season) — no public numbers, matching the rest of the site.
+// Individual tours with detail pages at /tours/[slug].
+//
+// PRICING (added 2026-08-28) — `from` is the headline per-person rate used on
+// cards and in Offer schema; `rates` is the table shown on the detail page.
+// Benchmarked against the live Doha market: Visit Qatar's official half-day
+// Inland Sea is QAR 330pp, Discover Qatar (Qatar Airways' DMC) private tours
+// run from QAR 227pp, shared desert safaris sit at QAR 150–350pp, sunset dhow
+// cruises at QAR 110–200pp, and Anantara's own Banana Island day pass is a
+// fixed QAR 395pp. We sit deliberately under the DMC/official rates and above
+// the budget operators, which is what "best price guarantee" can actually back.
+// Banana Island is a resale of the resort's own pass, so the margin there is
+// the transfer, not the pass.
 export const tours = [
   {
     slug: "desert-safari",
+    from: 250,
+    rates: [
+      { label: "Shared group tour", price: "QAR 250", unit: "per person" },
+      { label: "Private 4x4", price: "QAR 950", unit: "up to 6 guests" },
+      { label: "Children 4–11", price: "QAR 175", unit: "per child" },
+    ],
     name: "Desert Safari & Inland Sea",
     tagline: "Dune bashing, camel rides & a BBQ under the stars",
     img: "desert-safari",
@@ -103,6 +119,12 @@ export const tours = [
   },
   {
     slug: "doha-city-tour",
+    from: 175,
+    rates: [
+      { label: "Shared group tour", price: "QAR 175", unit: "per person" },
+      { label: "Private vehicle & guide", price: "QAR 750", unit: "up to 6 guests" },
+      { label: "Children 4–11", price: "QAR 120", unit: "per child" },
+    ],
     name: "Doha City Tour",
     tagline: "Old souqs, modern skylines & cultural icons in one day",
     img: "souq-waqif",
@@ -129,6 +151,13 @@ export const tours = [
   },
   {
     slug: "dhow-cruise",
+    from: 150,
+    rates: [
+      { label: "Sunset cruise", price: "QAR 150", unit: "per person" },
+      { label: "With BBQ dinner", price: "QAR 250", unit: "per person" },
+      { label: "Children 5–11", price: "QAR 90", unit: "under 5 free" },
+      { label: "Private dhow charter", price: "QAR 2,500", unit: "up to 20 guests" },
+    ],
     name: "Traditional Dhow Cruise",
     tagline: "Sail Doha Bay beneath the glittering skyline",
     img: "cruises",
@@ -155,6 +184,11 @@ export const tours = [
   },
   {
     slug: "banana-island",
+    from: 450,
+    rates: [
+      { label: "Day escape", price: "QAR 450", unit: "per person" },
+      { label: "Children 3–11", price: "QAR 195", unit: "under 3 free" },
+    ],
     name: "Banana Island Day Escape",
     tagline: "A crescent-shaped resort island off the Doha coast",
     img: "banana-island",

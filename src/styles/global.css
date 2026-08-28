@@ -587,3 +587,15 @@ ul { list-style: none; padding: 0; }
 .lightbox__next { right:20px; }
 .lightbox__close:hover, .lightbox__nav:hover { background: var(--gold); color:#04343b; border-color: var(--gold); }
 @media (max-width:560px) { .lightbox__nav { width:42px; height:42px; font-size:1.6rem; } .lightbox__prev { left:8px; } .lightbox__next { right:8px; } }
+
+/* ---------- tour rate table (booking sidebar) ---------- */
+.tour-book__price small { font-family: var(--sans); font-size: .95rem; font-weight: 500; color: var(--ink-soft); }
+.tour-rates { display: flex; flex-direction: column; margin-top: 16px; }
+.tour-rates li {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 10px 0; border-bottom: 1px dashed var(--line);
+}
+.tour-rates li:last-child { border-bottom: 0; }
+.tour-rates__label { display: flex; flex-direction: column; color: var(--ink); font-size: .93rem; }
+.tour-rates__label small { color: var(--ink-soft); font-size: .8rem; margin-top: 2px; }
+.tour-rates__price { font-weight: 700; color: var(--gold-dark); white-space: nowrap; }
