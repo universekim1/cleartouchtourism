@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site, tours } from "../data/site";
+
+const wa = `https://wa.me/${site.whatsapp}`;
+---
+<Base title="Page not found — Clear Touch Tourism &amp; Services"
+      description="That page has moved or no longer exists. Browse our Qatar tours, photography services and portfolio instead."
+      noindex>
+  <Header />
+
+  <section class="section section--cream nf">
+    <div class="container center">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="h-display">This page has wandered off</h1>
+      <div class="prose center">
+        <p>
+          The page you were looking for has moved or no longer exists. Nothing is lost —
+          here is everything you probably came for.
+        </p>
+      </div>
+
+      <div class="nf-links">
+        <a href="/tours">All tours &amp; experiences</a>
+        {tours.map((t) => <a href={`/tours/${t.slug}`}>{t.name}</a>)}
+        <a href="/photography">Photography &amp; video</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/about">About us</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <div class="hero__cta nf-cta">
+        <a class="btn btn--gold" href="/">Back to the homepage</a>
+        <a class="btn btn--outline" href={wa}>Ask us on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .nf { padding-block: clamp(60px, 10vw, 120px); }
+  .nf .prose { margin-inline: auto; }
+  .nf-links {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px; margin: 32px auto 0; max-width: 760px;
+  }
+  .nf-links a {
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 16px; font-size: .93rem; background: #fff;
+  }
+  .nf-links a:hover { border-color: var(--gold); color: var(--gold-dark); }
+  .nf-cta { justify-content: center; margin-top: 32px; }
+</style>

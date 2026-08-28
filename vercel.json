@@ -1,0 +1,44 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/index.htm", "destination": "/", "permanent": true },
+
+    { "source": "/agency", "destination": "/about", "permanent": true },
+    { "source": "/agency/index.htm", "destination": "/about", "permanent": true },
+    { "source": "/method", "destination": "/about", "permanent": true },
+    { "source": "/method/index.htm", "destination": "/about", "permanent": true },
+
+    { "source": "/destinations", "destination": "/tours", "permanent": true },
+    { "source": "/destinations/index.htm", "destination": "/tours", "permanent": true },
+
+    { "source": "/videos", "destination": "/photography", "permanent": true },
+    { "source": "/videos/index.htm", "destination": "/photography", "permanent": true },
+
+    { "source": "/contact/index.htm", "destination": "/contact", "permanent": true },
+
+    { "source": "/work/desert-safari", "destination": "/tours/desert-safari", "permanent": true },
+    { "source": "/work/desert-safari/index.htm", "destination": "/tours/desert-safari", "permanent": true },
+    { "source": "/work/banana-island", "destination": "/tours/banana-island", "permanent": true },
+    { "source": "/work/banana-island/index.htm", "destination": "/tours/banana-island", "permanent": true },
+
+    { "source": "/work/souq-waqif", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/souq-waqif/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/katara", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/katara/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/museum-of-islamic-art", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/museum-of-islamic-art/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/national-museum", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/national-museum/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/the-pearl-island", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/the-pearl-island/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/mina-district", "destination": "/tours/doha-city-tour", "permanent": true },
+    { "source": "/work/mina-district/index.htm", "destination": "/tours/doha-city-tour", "permanent": true },
+
+    { "source": "/work/al-khor-park", "destination": "/tours", "permanent": true },
+    { "source": "/work/al-khor-park/index.htm", "destination": "/tours", "permanent": true },
+
+    { "source": "/work", "destination": "/portfolio", "permanent": true },
+    { "source": "/work/index.htm", "destination": "/portfolio", "permanent": true },
+    { "source": "/work/:slug*", "destination": "/portfolio", "permanent": true }
+  ]
+}

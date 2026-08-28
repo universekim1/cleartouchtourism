@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { site } from "../data/site";
+import { site, tours } from "../data/site";
 const wa = `https://wa.me/${site.whatsapp}`;
 ---
 <footer class="footer">
@@ -17,8 +17,8 @@ const wa = `https://wa.me/${site.whatsapp}`;
       </div>
       <div>
         <h5>Tours</h5>
-        <a href="/tours">Desert Safaris</a><a href="/tours">City &amp; Culture</a>
-        <a href="/tours">Cruises &amp; Dining</a><a href="/tours">Island &amp; Beach</a>
+        {tours.map((t) => <a href={`/tours/${t.slug}`}>{t.name}</a>)}
+        <a href="/tours">All tours &amp; experiences</a>
       </div>
       <div>
         <h5>Studio</h5>
@@ -38,9 +38,20 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
     <div class="footer__bottom">
       <span>© {new Date().getFullYear()} Clear Touch Tourism &amp; Services. All rights reserved.</span>
+      <span class="footer__legal">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+      </span>
       <span>Licensed by Qatar Tourism</span>
     </div>
   </div>
 </footer>
 
 <a class="fab" href={wa} aria-label="Chat on WhatsApp"><Icon name="chat" size={28} /></a>
+
+<style>
+  /* Legal links sit inline in the bottom bar, overriding the footer's
+     default `a { display:block }` which would otherwise stack them. */
+  .footer__legal { display: flex; gap: 20px; }
+  .footer__legal a { display: inline; padding: 0; }
+</style>

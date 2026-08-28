@@ -1,0 +1,175 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+import about from "../assets/images/about.jpg";
+
+const updated = "28 August 2026";
+---
+<Base title="Terms of Service — Clear Touch Tourism &amp; Services"
+      description="Booking terms, payment, cancellation and conduct policy for Clear Touch Tourism & Services tours, transfers, photography and videography in Qatar."
+      >
+  <Header />
+
+  <PageHero image={about} eyebrow="Legal"
+    title="Terms of Service"
+    subtitle="The terms that apply when you book a tour, transfer or shoot with Clear Touch." />
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="legal prose">
+        <p class="legal__updated">Last updated: {updated}</p>
+
+        <p>
+          These terms govern bookings made with {site.fullName} (&ldquo;Clear Touch&rdquo;,
+          &ldquo;we&rdquo;, &ldquo;us&rdquo;), a licensed tour operator and creative studio in {site.location},
+          through <strong>cleartouchtourism.com</strong>, WhatsApp, email, our
+          online scheduling tool, or in person. By confirming a booking you accept these terms.
+        </p>
+
+        <h2>1. Bookings and confirmation</h2>
+        <p>
+          A booking is confirmed only once we have sent you a written confirmation by email or
+          WhatsApp stating the service, date, time and price. An enquiry, a quote, or a slot held in
+          our scheduling tool is not itself a confirmed booking. Please check your confirmation
+          carefully and tell us straight away if any detail is wrong.
+        </p>
+
+        <h2>2. Prices and payment</h2>
+        <p>
+          Prices are quoted per booking and depend on the group size, season and inclusions. Unless
+          stated otherwise, prices are in Qatari Riyal (QAR) and include the items listed under
+          &ldquo;What&rsquo;s included&rdquo; for that service. Anything listed under
+          &ldquo;Not included&rdquo; — entry tickets, meals, optional activities, gratuities and
+          personal expenses — is payable by you.
+        </p>
+        <p>
+          A deposit may be required to secure a date, with the balance due before or on the day of
+          service as set out in your confirmation. We will tell you the exact amount and payment
+          method in writing before you pay anything.
+        </p>
+
+        <h2>3. Changes and cancellation by you</h2>
+        <p>
+          Tell us as early as you can if your plans change and we will do our best to move your
+          booking. The cancellation terms that apply to your booking are stated in your written
+          confirmation, because they differ between services — a desert safari, a resort island day
+          pass and a full photography shoot each carry different commitments to third parties. Where
+          we have already paid a resort, boat operator or venue on your behalf, that portion may be
+          non-refundable.
+        </p>
+
+        <h2>4. Changes and cancellation by us</h2>
+        <p>
+          Safety comes first. We may change or cancel a tour because of weather, sea conditions, desert
+          or road conditions, vehicle or vessel issues, government restrictions, or anything else
+          outside our reasonable control. Where that happens we will offer you the first of these that
+          works for you: a rescheduled date, a comparable alternative experience, or a refund of the
+          amount you paid for the affected part.
+        </p>
+
+        <h2>5. Your responsibilities</h2>
+        <ul>
+          <li>Be at the agreed pickup point at the agreed time. Where a group departure is missed, it may not be possible to refund or repeat it.</li>
+          <li>Carry valid identification, and any visa or permit your itinerary requires.</li>
+          <li>Tell us in advance about medical conditions, pregnancy, mobility needs, allergies or dietary requirements that affect the activity.</li>
+          <li>Follow the reasonable safety instructions of your guide, driver or skipper at all times.</li>
+          <li>Supervise children in your party. Minors must be accompanied by a parent or guardian.</li>
+          <li>Respect Qatari law and local custom, including dress and conduct at cultural and religious sites.</li>
+        </ul>
+        <p>
+          We may end a service without refund if a guest&rsquo;s behaviour puts themselves, other
+          guests or our team at risk.
+        </p>
+
+        <h2>6. Activity risk</h2>
+        <p>
+          Some of our experiences — dune bashing, camel riding, sandboarding, water sports and boat
+          travel — carry inherent risk even when properly conducted. You take part voluntarily and
+          accept that risk. Please do not join an activity that is unsuitable for your health.
+        </p>
+
+        <h2>7. Insurance</h2>
+        <p>
+          We are licensed and insured as an operator. That cover does not replace personal travel
+          insurance, and we strongly recommend you hold your own policy covering medical costs,
+          cancellation and personal belongings.
+        </p>
+
+        <h2>8. Visa assistance</h2>
+        <p>
+          Where we help with a Qatar tourist visa, we prepare and submit the application on your
+          behalf. The decision belongs entirely to the Qatari authorities. We cannot guarantee an
+          outcome, and service fees for work already done are not refundable if an application is
+          refused.
+        </p>
+
+        <h2>9. Photography and video services</h2>
+        <ul>
+          <li><strong>Delivery.</strong> Edited images and films are delivered digitally within the timeframe stated in your booking confirmation.</li>
+          <li><strong>Copyright.</strong> We retain copyright in the images and footage we create. You receive a licence to use your delivered files for personal use, or for the commercial use agreed in writing for a commercial commission.</li>
+          <li><strong>Portfolio use.</strong> We may wish to show selected work in our portfolio or on social media. We will ask you first, and we will respect a no.</li>
+          <li><strong>Raw files.</strong> Unedited raw files are not part of a standard delivery.</li>
+          <li><strong>Creative judgement.</strong> Editing style is our professional judgement, in the style shown in our portfolio. Re-edits beyond the agreed revisions may be chargeable.</li>
+        </ul>
+
+        <h2>10. Website content</h2>
+        <p>
+          All photographs, video, text and design on this website belong to {site.fullName} and may not
+          be copied or reused without our written permission. We keep this site as accurate as we can,
+          but itineraries, timings and inclusions can change; your written booking confirmation is what
+          governs your booking.
+        </p>
+
+        <h2>11. Liability</h2>
+        <p>
+          Nothing in these terms limits liability for death or personal injury caused by our
+          negligence, or for anything else that cannot be limited under Qatari law. Beyond that, our
+          liability for any booking is limited to the amount you paid us for it, and we are not liable
+          for indirect losses such as missed flights or onward arrangements.
+        </p>
+
+        <h2>12. Complaints</h2>
+        <p>
+          If something goes wrong, tell your guide at the time so we have the chance to put it right on
+          the spot. If it is still unresolved, email <a href={`mailto:${site.email}`}>{site.email}</a> within 30 days and
+          we will respond.
+        </p>
+
+        <h2>13. Governing law</h2>
+        <p>
+          These terms are governed by the laws of the State of Qatar, and the courts of Qatar have
+          jurisdiction over any dispute.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          {site.fullName}<br />
+          {site.location}<br />
+          <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .legal { max-width: 780px; }
+  .legal__updated { font-size: .9rem; color: var(--teal); font-weight: 600; }
+  .legal h2 {
+    font-family: var(--serif); font-size: 1.4rem; color: var(--ink);
+    margin: 38px 0 14px;
+  }
+  .legal ul { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .legal li { color: var(--ink-soft); line-height: 1.7; padding-left: 18px; position: relative; }
+  .legal li::before {
+    content: ""; position: absolute; left: 0; top: .65em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+  }
+  .legal a { color: var(--gold-dark); text-decoration: underline; }
+</style>

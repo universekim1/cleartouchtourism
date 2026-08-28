@@ -9,6 +9,8 @@ export default defineConfig({
   trailingSlash: "ignore",
   integrations: [
     sitemap({
+      // The 404 page is noindex and must never be advertised to crawlers.
+      filter: (page) => !page.includes("/404"),
       // Vercel serves both /page and /page/ as 200 (duplicate content); the
       // canonical tag uses the no-trailing-slash form, so match it here.
       serialize: (item) => ({ ...item, url: item.url.replace(/\/$/, "") }),

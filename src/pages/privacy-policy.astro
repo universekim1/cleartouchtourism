@@ -1,0 +1,139 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+import about from "../assets/images/about.jpg";
+
+const updated = "28 August 2026";
+---
+<Base title="Privacy Policy — Clear Touch Tourism &amp; Services"
+      description="How Clear Touch Tourism & Services collects, uses and protects the personal information of guests booking tours, photography and videography in Qatar.">
+  <Header />
+
+  <PageHero image={about} eyebrow="Legal"
+    title="Privacy Policy"
+    subtitle="How we handle your information when you book a tour or a shoot with us." />
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="legal prose">
+        <p class="legal__updated">Last updated: {updated}</p>
+
+        <p>
+          This policy explains what personal information {site.fullName} (&ldquo;Clear Touch&rdquo;,
+          &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects when you use
+          <strong>cleartouchtourism.com</strong> or book one of our tours, photography or videography
+          services, how we use it, and what rights you have over it.
+        </p>
+
+        <h2>Who we are</h2>
+        <p>
+          {site.fullName} is a licensed tour operator and creative studio based in {site.location}.
+          For any question about this policy or your data, contact us at <a href={`mailto:${site.email}`}>{site.email}</a> or {site.phone}.
+        </p>
+
+        <h2>What we collect</h2>
+        <ul>
+          <li><strong>Booking and enquiry details</strong> — your name, email address, phone or WhatsApp number, and the details of the tour or shoot you are asking about, including dates, group size and any preferences or accessibility needs you tell us.</li>
+          <li><strong>Correspondence</strong> — messages you send us by email, WhatsApp, our contact form or social media, and our replies.</li>
+          <li><strong>Scheduling data</strong> — when you book through our online scheduling tool, the name, email and time slot you enter there.</li>
+          <li><strong>Photography and video</strong> — where you have engaged us for a shoot, the images and footage we capture for you.</li>
+          <li><strong>Basic technical data</strong> — standard server and analytics information such as your approximate location, device type, browser and the pages you viewed.</li>
+        </ul>
+        <p>
+          We do not collect payment card details on this website. Any deposit or balance is arranged
+          directly with you through the payment method agreed at the time of booking.
+        </p>
+
+        <h2>How we use it</h2>
+        <ul>
+          <li>To answer your enquiry and give you a quote.</li>
+          <li>To arrange, confirm and deliver your tour, transfer, visa assistance or shoot.</li>
+          <li>To contact you about your booking, including pickup times and changes.</li>
+          <li>To deliver your photographs and video files.</li>
+          <li>To keep the records we are required to keep as a licensed operator.</li>
+          <li>To improve the website and understand which pages people find useful.</li>
+        </ul>
+        <p>
+          We do not sell your personal information, and we do not send marketing messages to people
+          who have not asked for them.
+        </p>
+
+        <h2>Who we share it with</h2>
+        <p>
+          We share only what is necessary, only with the people who need it to deliver your booking:
+        </p>
+        <ul>
+          <li><strong>Guides, drivers and boat or resort operators</strong> — your name, group size and pickup details, so they can collect you.</li>
+          <li><strong>Qatari authorities</strong> — where a service such as visa assistance requires it, or where the law obliges us to.</li>
+          <li><strong>Service providers that run our tools</strong> — our website host, our email provider, our scheduling tool and our analytics provider, each of which processes data on our instructions.</li>
+        </ul>
+
+        <h2>Images of you</h2>
+        <p>
+          Photographs and video we take for you belong to your booking. We will not publish an
+          identifiable image of you on our website, portfolio or social channels without your
+          permission. If you have given permission and later change your mind, email us and we will
+          remove the image from anything we control.
+        </p>
+
+        <h2>Cookies and analytics</h2>
+        <p>
+          This site uses a small number of cookies and similar technologies: those needed to make the
+          site and the booking widget work, and basic analytics that tell us how many people visited
+          and which pages they read. You can block or delete cookies in your browser settings; the
+          site will still work, though the booking widget may not.
+        </p>
+
+        <h2>How long we keep it</h2>
+        <p>
+          Enquiries that do not become bookings are kept for up to 12 months. Booking records are kept
+          for as long as we are required to keep them for tax and licensing purposes. Photography and
+          video files are archived for a limited period after delivery so you can request a re-download;
+          please keep your own backup.
+        </p>
+
+        <h2>Your rights</h2>
+        <p>
+          You can ask us for a copy of the personal information we hold about you, ask us to correct
+          it, or ask us to delete it where we are not required to keep it. Email <a href={`mailto:${site.email}`}>{site.email}</a> and we will
+          respond within 30 days.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          If we change how we handle personal information we will update this page and the date at the
+          top. Material changes affecting an existing booking will be sent to you directly.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          {site.fullName}<br />
+          {site.location}<br />
+          <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .legal { max-width: 780px; }
+  .legal__updated { font-size: .9rem; color: var(--teal); font-weight: 600; }
+  .legal h2 {
+    font-family: var(--serif); font-size: 1.4rem; color: var(--ink);
+    margin: 38px 0 14px;
+  }
+  .legal ul { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .legal li { color: var(--ink-soft); line-height: 1.7; padding-left: 18px; position: relative; }
+  .legal li::before {
+    content: ""; position: absolute; left: 0; top: .65em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+  }
+  .legal a { color: var(--gold-dark); text-decoration: underline; }
+</style>
