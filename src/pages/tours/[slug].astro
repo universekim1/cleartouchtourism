@@ -40,6 +40,14 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
         })),
       },
       provider: { "@id": "https://cleartouchtourism.com/#business" },
+      subjectOf: {
+        "@type": "FAQPage",
+        mainEntity: tour.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
       offers: {
         "@type": "Offer",
         price: tour.from,
@@ -64,6 +72,11 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
 
         <h2 class="h-display">Overview</h2>
         <p class="prose">{tour.overview}</p>
+
+        <h3 class="tour-sub">What the day is actually like</h3>
+        <div class="prose">
+          {tour.experience.map((para) => <p>{para}</p>)}
+        </div>
 
         <h3 class="tour-sub">Highlights</h3>
         <ul class="tour-checks">
@@ -95,6 +108,26 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
             </li>
           ))}
         </ol>
+
+        <h3 class="tour-sub">Good to know</h3>
+        <dl class="tour-know">
+          {tour.goodToKnow.map((g) => (
+            <div class="tour-know__row">
+              <dt>{g.title}</dt>
+              <dd>{g.text}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <h3 class="tour-sub">Common questions</h3>
+        <div class="tour-faq">
+          {tour.faqs.map((f) => (
+            <details class="tour-faq__item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
 
       <aside class="tour-book">
