@@ -20,6 +20,43 @@ const heroImg = img(tour.img);
 const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
 ---
 <Base title={`${tour.name} — Clear Touch Tours`} description={tour.tagline}>
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      name: tour.name,
+      description: tour.overview,
+      url: `https://cleartouchtourism.com/tours/${tour.slug}`,
+      touristType: "Leisure travellers",
+      itinerary: {
+        "@type": "ItemList",
+        itemListElement: tour.itinerary.map((step, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: step.title,
+          description: step.text,
+        })),
+      },
+      provider: { "@id": "https://cleartouchtourism.com/#business" },
+      subjectOf: {
+        "@type": "FAQPage",
+        mainEntity: tour.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      offers: {
+        "@type": "Offer",
+        price: tour.from,
+        priceCurrency: "QAR",
+        availability: "https://schema.org/InStock",
+        url: `https://cleartouchtourism.com/tours/${tour.slug}`,
+      },
+    })}
+  />
   <Header active="tours" />
 
   {heroImg && <PageHero image={heroImg} eyebrow="Tour" title={tour.name} subtitle={tour.tagline} />}
@@ -30,11 +67,16 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
         <div class="tour-facts">
           <span><Icon name="clock" size={18} /> {tour.duration}</span>
           <span><Icon name="people" size={18} /> {tour.groupSize}</span>
-          <span><Icon name="tag" size={18} /> Tailored quote</span>
+          <span><Icon name="tag" size={18} /> From QAR {tour.from} per person</span>
         </div>
 
         <h2 class="h-display">Overview</h2>
         <p class="prose">{tour.overview}</p>
+
+        <h3 class="tour-sub">What the day is actually like</h3>
+        <div class="prose">
+          {tour.experience.map((para) => <p>{para}</p>)}
+        </div>
 
         <h3 class="tour-sub">Highlights</h3>
         <ul class="tour-checks">
@@ -66,13 +108,41 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
             </li>
           ))}
         </ol>
+
+        <h3 class="tour-sub">Good to know</h3>
+        <dl class="tour-know">
+          {tour.goodToKnow.map((g) => (
+            <div class="tour-know__row">
+              <dt>{g.title}</dt>
+              <dd>{g.text}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <h3 class="tour-sub">Common questions</h3>
+        <div class="tour-faq">
+          {tour.faqs.map((f) => (
+            <details class="tour-faq__item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
 
       <aside class="tour-book">
         <div class="tour-book__card">
-          <span class="tour-book__from">Pricing</span>
-          <div class="tour-book__price">Tailored quote</div>
-          <p class="tour-book__quote">Priced around your group, season and any add-ons — get yours in minutes.</p>
+          <span class="tour-book__from">From</span>
+          <div class="tour-book__price">QAR {tour.from}<small> / person</small></div>
+          <ul class="tour-rates">
+            {tour.rates.map((r) => (
+              <li>
+                <span class="tour-rates__label">{r.label}<small>{r.unit}</small></span>
+                <span class="tour-rates__price">{r.price}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="tour-book__quote">Group and season rates on request — tell us your dates and we'll confirm in minutes.</p>
           <ul class="tour-book__facts">
             <li><Icon name="clock" size={16} /> {tour.duration}</li>
             <li><Icon name="people" size={16} /> {tour.groupSize}</li>
@@ -115,7 +185,7 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
             <a class="tour-card" href={`/tours/${t.slug}`}>
               <div class="tour-card__media">
                 {ti && <Image src={ti} alt={t.name} widths={[400, 700]} sizes="(max-width:900px) 50vw, 360px" />}
-                <span class="tour-card__price">{t.groupSize}</span>
+                <span class="tour-card__price">From QAR {t.from}</span>
               </div>
               <div class="tour-card__body">
                 <h3>{t.name}</h3>

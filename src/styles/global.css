@@ -587,3 +587,42 @@ ul { list-style: none; padding: 0; }
 .lightbox__next { right:20px; }
 .lightbox__close:hover, .lightbox__nav:hover { background: var(--gold); color:#04343b; border-color: var(--gold); }
 @media (max-width:560px) { .lightbox__nav { width:42px; height:42px; font-size:1.6rem; } .lightbox__prev { left:8px; } .lightbox__next { right:8px; } }
+
+/* ---------- tour rate table (booking sidebar) ---------- */
+.tour-book__price small { font-family: var(--sans); font-size: .95rem; font-weight: 500; color: var(--ink-soft); }
+.tour-rates { display: flex; flex-direction: column; margin-top: 16px; }
+.tour-rates li {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 10px 0; border-bottom: 1px dashed var(--line);
+}
+.tour-rates li:last-child { border-bottom: 0; }
+.tour-rates__label { display: flex; flex-direction: column; color: var(--ink); font-size: .93rem; }
+.tour-rates__label small { color: var(--ink-soft); font-size: .8rem; margin-top: 2px; }
+.tour-rates__price { font-weight: 700; color: var(--gold-dark); white-space: nowrap; }
+
+/* ---------- tour "good to know" + FAQ ---------- */
+.tour-know { margin-top: 8px; }
+.tour-know__row { display: grid; grid-template-columns: 190px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.tour-know__row:last-child { border-bottom: 0; }
+.tour-know dt { font-weight: 700; color: var(--ink); font-size: .96rem; }
+.tour-know dd { color: var(--ink-soft); line-height: 1.7; font-size: .98rem; }
+
+.tour-faq { display: flex; flex-direction: column; margin-top: 8px; }
+.tour-faq__item { border-bottom: 1px solid var(--line); }
+.tour-faq__item:last-child { border-bottom: 0; }
+.tour-faq__item summary {
+  list-style: none; cursor: pointer; padding: 15px 34px 15px 0; position: relative;
+  font-weight: 600; color: var(--ink); font-size: 1rem; line-height: 1.5;
+}
+.tour-faq__item summary::-webkit-details-marker { display: none; }
+.tour-faq__item summary::after {
+  content: ""; position: absolute; right: 6px; top: 22px;
+  width: 9px; height: 9px; border-right: 2px solid var(--gold-dark); border-bottom: 2px solid var(--gold-dark);
+  transform: rotate(45deg); transition: transform .2s ease;
+}
+.tour-faq__item[open] summary::after { transform: rotate(-135deg); top: 26px; }
+.tour-faq__item p { color: var(--ink-soft); line-height: 1.75; padding: 0 34px 18px 0; font-size: .98rem; }
+
+@media (max-width: 700px) {
+  .tour-know__row { grid-template-columns: 1fr; gap: 4px; }
+}

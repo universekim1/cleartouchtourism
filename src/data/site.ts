@@ -72,11 +72,27 @@ export const experiences = [
   { vehicles: true,            title: "Airport Transfers",     tag: "Door to door",      text: "Private transfers and group vans from Hamad International, around the clock.",    href: "/contact",              cta: "Enquire" },
 ];
 
-// Individual tours with detail pages at /tours/[slug]. Pricing is quote-based
-// (tailored per group/season) — no public numbers, matching the rest of the site.
+// Individual tours with detail pages at /tours/[slug].
+//
+// PRICING (added 2026-08-28) — `from` is the headline per-person rate used on
+// cards and in Offer schema; `rates` is the table shown on the detail page.
+// Benchmarked against the live Doha market: Visit Qatar's official half-day
+// Inland Sea is QAR 330pp, Discover Qatar (Qatar Airways' DMC) private tours
+// run from QAR 227pp, shared desert safaris sit at QAR 150–350pp, sunset dhow
+// cruises at QAR 110–200pp, and Anantara's own Banana Island day pass is a
+// fixed QAR 395pp. We sit deliberately under the DMC/official rates and above
+// the budget operators, which is what "best price guarantee" can actually back.
+// Banana Island is a resale of the resort's own pass, so the margin there is
+// the transfer, not the pass.
 export const tours = [
   {
     slug: "desert-safari",
+    from: 250,
+    rates: [
+      { label: "Shared group tour", price: "QAR 250", unit: "per person" },
+      { label: "Private 4x4", price: "QAR 950", unit: "up to 6 guests" },
+      { label: "Children 4–11", price: "QAR 175", unit: "per child" },
+    ],
     name: "Desert Safari & Inland Sea",
     tagline: "Dune bashing, camel rides & a BBQ under the stars",
     img: "desert-safari",
@@ -99,10 +115,35 @@ export const tours = [
       { time: "Golden hour", title: "Inland Sea & camels", text: "Camel rides, sandboarding and photos as the sun sets over Khor Al Adaid." },
       { time: "Evening", title: "Desert BBQ", text: "Relax at camp with a traditional BBQ dinner before the drive back to your hotel." },
     ],
+    experience: [
+      "The drive south is part of the experience. Doha's towers thin into low scrub, then into open sand, and somewhere along the way your driver pulls over to let the tyres down — the small ritual that turns a road car into a desert one. After that the tarmac ends and the ride begins.",
+      "Dune bashing is the part everyone films. A good driver reads sand the way a sailor reads water, carving along the crests and dropping down the soft faces, and it is genuinely thrilling rather than merely bumpy. We pace it to the car: say the word and your driver will ease off without being asked twice.",
+      "Then the desert goes quiet. Khor Al Adaid — the Inland Sea — is one of the few places on earth where the sea reaches into the desert, a protected reserve near the Saudi border that you cannot reach any way but by 4x4. Camels wait at the ridge, sandboards lean against the cars, and as the sun drops the whole basin turns copper. Dinner at camp follows: grilled meat, salads, bread, sweet tea, and enough time to sit still.",
+    ],
+    goodToKnow: [
+      { title: "Pickup", text: "We collect you from your hotel or residence in Doha. Departures are timed so you reach the Inland Sea for golden hour, so the exact hour moves with the season's sunset and is confirmed the day before." },
+      { title: "What to wear", text: "Loose clothes and shoes you do not mind filling with sand. Between November and March the desert cools fast once the sun is down — bring a light jacket even if the afternoon was warm." },
+      { title: "What to bring", text: "Sunglasses, sunscreen, a hat, and a charged phone or camera. There is no shade between the dunes and nowhere to buy anything once you leave the road." },
+      { title: "Who should sit this out", text: "Dune bashing is not advised during pregnancy, or with back, neck or heart conditions. Tell us when you book and we will plan a gentler desert route rather than cancel your day." },
+      { title: "Best time of year", text: "October to April is the season. From June to September afternoons regularly pass 40°C, so we push departures later or steer you toward a different day out." },
+    ],
+    faqs: [
+      { q: "How far is the Inland Sea from Doha?", a: "Roughly an hour and a half each way, part of it on tarmac and the last stretch across open sand. That travel time is already inside the six-hour window, not on top of it." },
+      { q: "Can I skip the dune bashing?", a: "Yes. Tell your driver and they will take a level route through the desert to the Inland Sea instead. You will still get the camels, the sandboarding, the sunset and the camp." },
+      { q: "Is the BBQ dinner included?", a: "It is — grilled meat, salads, bread, fruit and soft drinks at the desert camp. Vegetarian and other dietary needs are easy to cover if you tell us in advance." },
+      { q: "Can we swim at the Inland Sea?", a: "The water is shallow, warm and very calm, and plenty of guests do. There are no changing facilities out there, so wear swimwear under your clothes and pack a towel." },
+      { q: "Will we get good photographs?", a: "Your guide is happy to shoot on your phone. If you want the day properly documented, we are also a photography studio — a photographer can join your safari, and the dunes at golden hour are about the best backdrop in Qatar." },
+    ],
     gallery: ["desert-safari", "banana-island", "the-pearl"],
   },
   {
     slug: "doha-city-tour",
+    from: 175,
+    rates: [
+      { label: "Shared group tour", price: "QAR 175", unit: "per person" },
+      { label: "Private vehicle & guide", price: "QAR 750", unit: "up to 6 guests" },
+      { label: "Children 4–11", price: "QAR 120", unit: "per child" },
+    ],
     name: "Doha City Tour",
     tagline: "Old souqs, modern skylines & cultural icons in one day",
     img: "souq-waqif",
@@ -125,10 +166,36 @@ export const tours = [
       { time: "Midday", title: "Corniche & West Bay", text: "Drive the bay with photo stops beneath Doha's futuristic skyline." },
       { time: "Afternoon", title: "Katara & The Pearl", text: "Explore the cultural village and the marina promenade before heading back." },
     ],
+    experience: [
+      "Souq Waqif is where the day starts, and where most people would happily spend it. The restored market is a warren of narrow lanes selling spices, oud, textiles and Persian carpets, with a falcon souq at one end where hooded birds sit on perches and their owners talk shop. Behind it are the Emiri horse stables. It is a working market, not a museum, and it smells like one.",
+      "From there the city changes register entirely. The Museum of Islamic Art is I. M. Pei's last great building, set on its own island with fourteen centuries of art inside and a park behind it that frames the West Bay skyline better than any postcard. We drive the Corniche between stops, which is when the scale of what Qatar has built in thirty years lands.",
+      "The afternoon runs on culture and coastline: Katara Cultural Village with its amphitheatre, galleries and tiled mosques, then the Pearl-Qatar, an island of marinas and pastel Mediterranean facades where Doha comes to walk in the evening. Your guide adjusts the order to the light and the crowds rather than marching a fixed list.",
+    ],
+    goodToKnow: [
+      { title: "Pickup", text: "Hotel, residence, airport or cruise terminal, in an air-conditioned vehicle. Morning starts are the norm because the museums and souq are calmest then, but we can run the same tour into the evening." },
+      { title: "What to wear", text: "Dress modestly at cultural and religious sites — shoulders and knees covered for everyone. Visitors are not expected to wear an abaya. Comfortable shoes matter more than you would think; there is a fair amount of walking between stops." },
+      { title: "Fridays", text: "Friday is the day of congregational prayer, so shops and some sites open later in the afternoon. We shift the running order around it rather than skipping anything." },
+      { title: "Entry tickets", text: "The tour covers exteriors, gardens and grounds. Museum interiors are a simple add-on — tell us in advance and we will build the tickets and the extra time into your day." },
+      { title: "Best time of year", text: "October to April is comfortable for walking. In high summer we keep stops shorter, lean on indoor sites, and run the tour later in the day." },
+    ],
+    faqs: [
+      { q: "Do we go inside the Museum of Islamic Art?", a: "The standard four hours covers the building, the island and MIA Park, which is where the skyline view is. Going inside is worth doing and easy to add — just say so when you book and we will allow the time and arrange tickets." },
+      { q: "Is this a good layover tour?", a: "One of the most common reasons people book it. Four hours plus airport transfers fits comfortably inside a long layover — check your own entry requirements, then send us your flight times and we will build the tour backwards from them." },
+      { q: "Can we change the stops?", a: "Yes, on a private tour. Swap the Pearl for the National Museum of Qatar, add Lusail, spend longer in the souq — it is your afternoon. On shared departures the route is fixed." },
+      { q: "Is it suitable for older travellers?", a: "Largely, yes. Every stop is reachable by vehicle and the walking is flat, but Souq Waqif is cobbled and uneven underfoot. Tell us about mobility needs and we will pick the drop-off points accordingly." },
+      { q: "Can we do this and a desert safari in one day?", a: "You can, and many guests do — city tour in the morning, safari from the afternoon. It is a long day, so we suggest it mainly when your time in Qatar is short." },
+    ],
     gallery: ["souq-waqif", "museum-islamic-art", "katara", "national-museum"],
   },
   {
     slug: "dhow-cruise",
+    from: 150,
+    rates: [
+      { label: "Sunset cruise", price: "QAR 150", unit: "per person" },
+      { label: "With BBQ dinner", price: "QAR 250", unit: "per person" },
+      { label: "Children 5–11", price: "QAR 90", unit: "under 5 free" },
+      { label: "Private dhow charter", price: "QAR 2,500", unit: "up to 20 guests" },
+    ],
     name: "Traditional Dhow Cruise",
     tagline: "Sail Doha Bay beneath the glittering skyline",
     img: "cruises",
@@ -151,10 +218,34 @@ export const tours = [
       { time: "Golden hour", title: "Skyline & sunset", text: "Relax on deck for photos as the city lights come alive." },
       { time: "Return", title: "Back to shore", text: "Return to the jetty after an unforgettable sail." },
     ],
+    experience: [
+      "The dhow is the point. These wooden boats carried pearl divers and cargo across the Gulf long before the skyline existed, and the ones on Doha Bay today are built the same way — timber decks, low cushioned seating, a wheelhouse that would not have looked out of place a century ago. You board at the Corniche, and the city starts to recede almost immediately.",
+      "For the next couple of hours the whole of Doha rotates slowly past the rail. The Museum of Islamic Art from the water, the dhow harbour, the Corniche's long curve, and then West Bay — a wall of towers that switches on floor by floor as the light goes. It is the one view of the city that no photograph taken from land quite manages.",
+      "It is a slow, unhurried thing to do, which is exactly why people like it. Couples take the bow, families spread out on the cushions, and nobody is rushed off the boat at the end. Add the BBQ dinner and it stretches into a full evening on the water.",
+    ],
+    goodToKnow: [
+      { title: "Boarding", text: "Boats leave from the dhow jetty on the Corniche. Arrive ten to fifteen minutes early to board without hurrying. Hotel transfers are an easy add-on if you would rather not find it yourself." },
+      { title: "Timing", text: "Sailing times follow the sunset, so they move through the year — earlier from October to February, later from March to September. Your confirmed time comes with your booking." },
+      { title: "What to wear", text: "Smart-casual is right. There is a real breeze out on the bay even on a warm evening, so bring a light layer, and flat shoes are easier on a moving deck than heels." },
+      { title: "Seasickness", text: "Doha Bay is sheltered and the water is usually glassy. This is a gentle sail rather than open-sea sailing, and it suits people who would normally avoid boats." },
+      { title: "Children", text: "Very welcome, and under-fives sail free. The decks are open, so small children need an adult within arm's reach throughout." },
+    ],
+    faqs: [
+      { q: "How long is the cruise?", a: "About an hour and a half to two hours for the sunset sailing. The dinner cruise runs a little longer because nobody eats in a hurry." },
+      { q: "What is the difference between the sunset and dinner cruises?", a: "The route is the same. The sunset sailing is the cruise on its own; the dinner version adds a BBQ buffet served on board, which turns it from an outing into the evening's plan." },
+      { q: "Is the boat private?", a: "Standard sailings are shared, which is part of the atmosphere. If you want the boat to yourselves — a proposal, a birthday, a company evening — we charter a whole dhow for up to twenty guests." },
+      { q: "Do we need to book ahead?", a: "Sunset sailings fill up quickly from October through April, and around public holidays. A day or two ahead is usually enough; the same evening is often possible, but we cannot promise it in season." },
+      { q: "Can you photograph a proposal on board?", a: "Yes, and we are asked often. Because we are a photography studio as well as a tour operator, a photographer can be aboard and unobtrusive, with the skyline lighting up behind you. Tell us the plan and we will keep it quiet." },
+    ],
     gallery: ["cruises", "the-pearl", "mina-district"],
   },
   {
     slug: "banana-island",
+    from: 450,
+    rates: [
+      { label: "Day escape", price: "QAR 450", unit: "per person" },
+      { label: "Children 3–11", price: "QAR 195", unit: "under 3 free" },
+    ],
     name: "Banana Island Day Escape",
     tagline: "A crescent-shaped resort island off the Doha coast",
     img: "banana-island",
@@ -176,6 +267,25 @@ export const tours = [
       { time: "Daytime", title: "Beach & pools", text: "Enjoy the beaches, pools and activities at your own pace." },
       { time: "Afternoon", title: "Unwind or explore", text: "Try water sports, book a spa treatment, or simply relax by the Gulf." },
       { time: "Evening", title: "Return to Doha", text: "Catch the catamaran back to the mainland." },
+    ],
+    experience: [
+      "Getting there sets the tone. The catamaran leaves from the mainland port and crosses in around twenty-five minutes, and by the time Doha's skyline has shrunk to a strip on the horizon the day has already changed pace. The island appears as a low green crescent with a beach curved around the inside of it.",
+      "What you do with the day is genuinely up to you. There is a long stretch of calm, shallow beach on the sheltered side, a set of pools if you would rather not deal with sand, and water sports for anyone who came to move rather than to lie still. There is also a good case for doing none of it and reading under a parasol until lunch.",
+      "It works particularly well for families, because the beach shelves gently and there is enough on the island to keep older children busy while the adults do not move. Couples come for the opposite reason. Either way you are back on the mainland by evening with the whole day behind you.",
+    ],
+    goodToKnow: [
+      { title: "Getting there", text: "Return catamaran transfers are included and sail to a fixed timetable, so the crossing times shape your day. We confirm both sailings when you book. Hotel pickup to the port is included in the price." },
+      { title: "What is included", text: "Your pass covers the crossing, beach and pool access, and resort credit toward food and activities. The exact credit depends on the pass and the day of the week, and we confirm it in writing before you pay." },
+      { title: "What to bring", text: "Swimwear, a towel, sunscreen and photo ID. Changing facilities are available on the island, and anything you have not brought is generally buyable there at resort prices." },
+      { title: "Payable on site", text: "Meals beyond your credit, spa treatments and some water sports are settled directly with the resort. Bring a card — it is a cashless island." },
+      { title: "Best time of year", text: "October to May is ideal. July and August are swimmable but genuinely hot, so the pools and shade matter more than the beach does." },
+    ],
+    faqs: [
+      { q: "How long is the boat ride?", a: "Around twenty-five minutes each way on a comfortable catamaran, with seating inside and out. It is a short, calm crossing rather than a sea voyage." },
+      { q: "Is it a full day?", a: "Effectively, yes — the sailing times bracket it. You get the better part of a day on the island, and we choose the crossing pair that gives you the most of it." },
+      { q: "Is it good for young children?", a: "Very. The beach is shallow and calm and the island is entirely self-contained, so there is no traffic and nothing to walk to. Under-threes come free." },
+      { q: "Can we stay overnight instead?", a: "The island is a resort as well as a day destination. If you would rather stay the night, tell us and we will quote the stay instead of the day pass." },
+      { q: "Can we book a photo session there?", a: "Yes. The crescent beach and the Doha skyline across the water make it one of the better shoots in Qatar, and we run it as a package — day pass plus a photographer for part of the day." },
     ],
     gallery: ["banana-island", "the-pearl"],
   },
