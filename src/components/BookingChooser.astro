@@ -1,0 +1,355 @@
+---
+/* ============ BOOKING CHOOSER ============
+   A two-step modal that runs BEFORE the Cal.com calendar, so every booking
+   arrives with the exact thing the customer wants attached to it.
+
+     step 1  Photography & Video  |  A tour
+     step 2  which package / which tour
+     then    the Cal.com modal opens with `package` prefilled
+
+   The answer lands in the Cal.com booking question whose IDENTIFIER (slug)
+   must be exactly `package`. Until that question exists on the event type,
+   the prefill is simply ignored — nothing breaks.
+
+   Any element on the site opens this by carrying `data-book`:
+     data-book                       → start at step 1
+     data-book="photography"|"tour"  → jump to that step-2 list
+     data-book-package="…"           → skip the chooser, book that thing
+     data-book-select="#exp"         → read a <select> and jump accordingly
+     data-book-guests="#guests"      → pass guest count into Cal's notes
+   ======================================== */
+import { site, tours, photoPackages } from "../data/site";
+
+const photography = photoPackages.map((p) => ({
+  label: p.name,
+  sub: p.tagline,
+  badge: p.badge ?? null,
+  value: `Photography — ${p.name}${p.tagline ? ` (${p.tagline})` : ""}`,
+  // Weddings & Commercial is quote-based (ctaType "contact"), so it goes to
+  // the enquiry form rather than a fixed calendar slot.
+  href: p.ctaType === "contact" ? "/contact" : null,
+}));
+
+const tourList = tours.map((t) => ({
+  label: t.name,
+  sub: `${t.duration} · from QAR ${t.from} per person`,
+  badge: null,
+  value: `Tour — ${t.name}`,
+  href: null,
+}));
+
+const bySlug = (s: string) => tours.find((t) => t.slug === s)?.name;
+
+// Maps the homepage hero's "What do you need" <select> onto a chooser answer,
+// so a visitor who already picked there is not asked the same thing twice.
+const heroMap: Record<string, string> = {
+  "Desert Safari": `Tour — ${bySlug("desert-safari")}`,
+  "Doha City Tour": `Tour — ${bySlug("doha-city-tour")}`,
+  "Dhow Cruise": `Tour — ${bySlug("dhow-cruise")}`,
+  "Photography Session": "step:photography",
+  "Video / Reel Shoot": "step:photography",
+};
+
+const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: tourList, heroMap };
+---
+
+<div class="bc" id="bookingChooser" hidden>
+  <div class="bc__scrim" data-bc-close></div>
+
+  <div class="bc__panel" role="dialog" aria-modal="true" aria-labelledby="bcTitle" tabindex="-1">
+    <button class="bc__x" type="button" data-bc-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </button>
+
+    <p class="bc__step" id="bcStep">Step 1 of 2</p>
+    <h2 class="bc__title" id="bcTitle">What would you like to book?</h2>
+    <p class="bc__lead" id="bcLead">Tell us what you're after and we'll show you live availability.</p>
+
+    <!-- ---------- step 1 ---------- -->
+    <div class="bc__cards" data-bc-panel="root">
+      <button class="bc__card" type="button" data-bc-go="photography">
+        <span class="bc__card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
+            <circle cx="12" cy="13" r="3.4" />
+          </svg>
+        </span>
+        <span class="bc__card-body">
+          <span class="bc__card-title">Photography &amp; Video</span>
+          <span class="bc__card-sub">Portraits, studio sessions, parties, weddings &amp; brand work</span>
+        </span>
+        <span class="bc__chev" aria-hidden="true">→</span>
+      </button>
+
+      <button class="bc__card" type="button" data-bc-go="tour">
+        <span class="bc__card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" />
+          </svg>
+        </span>
+        <span class="bc__card-body">
+          <span class="bc__card-title">A tour</span>
+          <span class="bc__card-sub">Desert, city, dhow cruise and island day trips across Qatar</span>
+        </span>
+        <span class="bc__chev" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <!-- ---------- step 2: photography ---------- -->
+    <div class="bc__list" data-bc-panel="photography" hidden>
+      {photography.map((o) => (
+        <button class="bc__opt" type="button" data-bc-value={o.value} data-bc-href={o.href}>
+          <span class="bc__opt-main">
+            <span class="bc__opt-title">
+              {o.label}
+              {o.badge && <span class="bc__tag">{o.badge}</span>}
+            </span>
+            <span class="bc__opt-sub">{o.sub}</span>
+          </span>
+          <span class="bc__chev" aria-hidden="true">→</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- ---------- step 2: tours ---------- -->
+    <div class="bc__list" data-bc-panel="tour" hidden>
+      {tourList.map((o) => (
+        <button class="bc__opt" type="button" data-bc-value={o.value}>
+          <span class="bc__opt-main">
+            <span class="bc__opt-title">{o.label}</span>
+            <span class="bc__opt-sub">{o.sub}</span>
+          </span>
+          <span class="bc__chev" aria-hidden="true">→</span>
+        </button>
+      ))}
+    </div>
+
+    <button class="bc__back" type="button" id="bcBack" hidden>← Back</button>
+  </div>
+</div>
+
+<script type="application/json" id="bcData" set:html={JSON.stringify(data)}></script>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("bookingChooser");
+    var dataEl = document.getElementById("bcData");
+    if (!root || !dataEl) return;
+
+    var D = JSON.parse(dataEl.textContent);
+    var panel = root.querySelector(".bc__panel");
+    var back = document.getElementById("bcBack");
+    var stepEl = document.getElementById("bcStep");
+    var titleEl = document.getElementById("bcTitle");
+    var leadEl = document.getElementById("bcLead");
+    var lastFocus = null;
+    var pendingNotes = "";
+
+    var COPY = {
+      root: ["Step 1 of 2", "What would you like to book?", "Tell us what you're after and we'll show you live availability."],
+      photography: ["Step 2 of 2", "Which session?", "Pick the closest fit — we'll tailor the details together."],
+      tour: ["Step 2 of 2", "Which tour?", "Pick your experience, then choose a date and time."],
+    };
+
+    function show(name) {
+      root.querySelectorAll("[data-bc-panel]").forEach(function (p) {
+        p.hidden = p.getAttribute("data-bc-panel") !== name;
+      });
+      var c = COPY[name] || COPY.root;
+      stepEl.textContent = c[0];
+      titleEl.textContent = c[1];
+      leadEl.textContent = c[2];
+      back.hidden = name === "root";
+      var first = root.querySelector("[data-bc-panel]:not([hidden]) button");
+      if (first) first.focus();
+    }
+
+    function open(step) {
+      lastFocus = document.activeElement;
+      root.hidden = false;
+      document.body.style.overflow = "hidden";
+      show(step || "root");
+    }
+
+    function close() {
+      root.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    /* Opens the Cal.com modal with the chosen thing attached. `package` is the
+       slug of the booking question on the event type; `notes` is Cal's own
+       "Additional notes" field. If the embed script hasn't loaded, fall back to
+       the hosted booking page carrying the same values. */
+    function openCal(value, notes) {
+      var cfg = { layout: "month_view" };
+      if (value) cfg.package = value;
+      if (notes) cfg.notes = notes;
+
+      var api = window.Cal && window.Cal.ns && window.Cal.ns.book;
+      if (api) {
+        try {
+          api("modal", { calLink: D.calLink, config: cfg });
+          return true;
+        } catch (e) {}
+      }
+      var q = [];
+      for (var k in cfg) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(cfg[k]));
+      window.location.href = D.calUrl + "?" + q.join("&");
+      return true;
+    }
+
+    function choose(value, href) {
+      close();
+      if (href) {
+        window.location.href = href + "?package=" + encodeURIComponent(value);
+        return;
+      }
+      openCal(value, pendingNotes);
+    }
+
+    /* ---------- wiring ---------- */
+    root.addEventListener("click", function (e) {
+      var closer = e.target.closest("[data-bc-close]");
+      if (closer) { close(); return; }
+
+      var go = e.target.closest("[data-bc-go]");
+      if (go) { show(go.getAttribute("data-bc-go")); return; }
+
+      var opt = e.target.closest("[data-bc-value]");
+      if (opt) { choose(opt.getAttribute("data-bc-value"), opt.getAttribute("data-bc-href")); return; }
+
+      if (e.target.closest("#bcBack")) show("root");
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !root.hidden) close();
+    });
+
+    // Keep tab focus inside the dialog while it is open.
+    panel.addEventListener("keydown", function (e) {
+      if (e.key !== "Tab") return;
+      var f = panel.querySelectorAll("button:not([hidden])");
+      var vis = [];
+      f.forEach(function (el) { if (el.offsetParent !== null) vis.push(el); });
+      if (!vis.length) return;
+      var first = vis[0], last = vis[vis.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    document.addEventListener("click", function (e) {
+      var trigger = e.target.closest("[data-book], [data-book-package]");
+      if (!trigger) return;
+      e.preventDefault();
+
+      pendingNotes = "";
+      var guestSel = trigger.getAttribute("data-book-guests");
+      if (guestSel) {
+        var g = document.querySelector(guestSel);
+        if (g && g.value) pendingNotes = g.value;
+      }
+
+      // An explicit package (e.g. a tour detail page) books straight away.
+      var fixed = trigger.getAttribute("data-book-package");
+      if (fixed) { openCal(fixed, pendingNotes); return; }
+
+      // The hero's own dropdown already answers step 1 (and sometimes step 2).
+      var selSel = trigger.getAttribute("data-book-select");
+      if (selSel) {
+        var sel = document.querySelector(selSel);
+        var mapped = sel && D.heroMap[sel.value];
+        if (mapped && mapped.indexOf("step:") === 0) { open(mapped.slice(5)); return; }
+        if (mapped) { openCal(mapped, pendingNotes); return; }
+      }
+
+      var start = trigger.getAttribute("data-book");
+      open(start === "photography" || start === "tour" ? start : "root");
+    });
+  })();
+</script>
+
+<style>
+  .bc[hidden] { display: none; }
+  .bc {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .bc__scrim { position: absolute; inset: 0; background: rgba(8, 30, 50, .55); backdrop-filter: blur(3px); }
+  .bc__panel {
+    position: relative; width: min(560px, 100%);
+    max-height: min(88vh, 760px); overflow-y: auto;
+    background: var(--white); border-radius: var(--radius-lg);
+    padding: clamp(26px, 4vw, 38px);
+    box-shadow: 0 40px 80px -30px rgba(8, 30, 50, .5);
+    animation: bcIn .22s ease-out;
+  }
+  @keyframes bcIn { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+  @media (prefers-reduced-motion: reduce) { .bc__panel { animation: none; } }
+
+  .bc__x {
+    position: absolute; top: 14px; right: 14px;
+    display: grid; place-items: center; width: 38px; height: 38px;
+    border: 0; border-radius: 50%; background: var(--cream-2);
+    color: var(--ink); cursor: pointer; transition: background .15s;
+  }
+  .bc__x:hover { background: var(--line); }
+
+  .bc__step {
+    font-size: 12px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 10px;
+  }
+  .bc__title { font-family: var(--serif); font-size: clamp(25px, 3.4vw, 31px); line-height: 1.15; }
+  .bc__lead { color: var(--ink-soft); font-size: 15px; margin: 10px 0 24px; }
+
+  .bc__cards, .bc__list { display: grid; gap: 12px; }
+  .bc__list[hidden], .bc__cards[hidden] { display: none; }
+
+  .bc__card, .bc__opt {
+    display: flex; align-items: center; gap: 16px; width: 100%;
+    text-align: left; cursor: pointer; font: inherit; color: var(--ink);
+    background: var(--white); border: 1.5px solid var(--line);
+    border-radius: var(--radius); padding: 16px 18px;
+    transition: border-color .16s, transform .16s, box-shadow .16s, background .16s;
+  }
+  .bc__card:hover, .bc__opt:hover, .bc__card:focus-visible, .bc__opt:focus-visible {
+    border-color: var(--gold); background: var(--cream-2);
+    transform: translateY(-2px); box-shadow: var(--shadow-sm); outline: none;
+  }
+  .bc__card { padding: 20px; }
+  .bc__card-icon {
+    flex: none; display: grid; place-items: center; width: 52px; height: 52px;
+    border-radius: 14px; background: var(--cream-2); color: var(--teal);
+  }
+  .bc__card-body, .bc__opt-main { display: grid; gap: 3px; flex: 1; min-width: 0; }
+  .bc__card-title, .bc__opt-title { font-weight: 700; font-size: 17px; }
+  .bc__opt-title { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .bc__card-sub, .bc__opt-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
+  .bc__tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--white); background: var(--accent);
+    padding: 3px 9px; border-radius: var(--radius-pill);
+  }
+  .bc__chev { flex: none; color: var(--gold-dark); font-size: 19px; }
+
+  .bc__back {
+    margin-top: 20px; padding: 0; border: 0; background: none; cursor: pointer;
+    font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-soft);
+  }
+  .bc__back[hidden] { display: none; }
+  .bc__back:hover { color: var(--teal); }
+
+  @media (max-width: 560px) {
+    .bc { padding: 0; align-items: flex-end; }
+    .bc__panel {
+      width: 100%; max-height: 92vh;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .bc__card { padding: 16px; gap: 13px; }
+    .bc__card-icon { width: 44px; height: 44px; }
+  }
+</style>

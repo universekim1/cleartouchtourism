@@ -92,6 +92,16 @@ const wa = `https://wa.me/${site.whatsapp}`;
     (function () {
       var f = document.getElementById("inquiryForm");
       if (!f) return;
+
+      // The booking chooser sends quote-based work here with ?package=…
+      // Prefill so the visitor doesn't retype the choice they just made.
+      var pkg = new URLSearchParams(location.search).get("package");
+      if (pkg) {
+        var svc = document.getElementById("cService");
+        if (svc) svc.value = pkg.indexOf("Tour") === 0 ? "Tour / experience" : "Photography session";
+        var m = document.getElementById("cMsg");
+        if (m && !m.value) m.value = "I'd like to enquire about: " + pkg + ". ";
+      }
       f.addEventListener("submit", function (e) {
         e.preventDefault();
         var num = f.getAttribute("data-wa");
