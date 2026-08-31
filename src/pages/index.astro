@@ -68,18 +68,10 @@ const wa = `https://wa.me/${site.whatsapp}`;
           <a class="btn btn--whatsapp" href={wa}>Chat on WhatsApp</a>
         </div>
 
-        <form class="booking" onsubmit="return false">
-          <div class="booking__field">
-            <label for="exp">What do you need</label>
-            <select id="exp">
-              <option value="">Choose one…</option>
-              <option>Desert Safari</option>
-              <option>Doha City Tour</option>
-              <option>Dhow Cruise</option>
-              <option>Photography Session</option>
-              <option>Video / Reel Shoot</option>
-            </select>
-          </div>
+        <!-- "What do you need" used to live here; the booking chooser's first
+             step asks exactly that, so the field was removed rather than
+             asking twice. Guests still rides along into the Cal.com notes. -->
+        <form class="booking booking--solo" onsubmit="return false">
           <div class="booking__field">
             <label for="guests">Guests</label>
             <select id="guests"><option>2 Guests</option><option>1 Guest</option><option>3–4 Guests</option><option>5+ Guests</option></select>

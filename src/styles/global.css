@@ -189,6 +189,9 @@ ul { list-style: none; padding: 0; }
   border-radius: 12px; background:#fff; color:var(--ink);
 }
 .booking__submit { grid-column: 1 / -1; }
+/* single-field variant: the field and the CTA sit side by side */
+.booking--solo { grid-template-columns: minmax(150px, 210px) 1fr; align-items: end; }
+.booking--solo .booking__submit { grid-column: auto; }
 .booking__submit .btn { width:100%; justify-content:center; }
 
 /* ---------- tour cards (listing) ---------- */
@@ -397,7 +400,8 @@ ul { list-style: none; padding: 0; }
   .split { grid-template-columns: 1fr; }
   .split--reverse > *:first-child { order: 0; }
   .tgrid, .footer__top { grid-template-columns: 1fr 1fr; }
-  .booking { grid-template-columns: 1fr; }
+  .booking, .booking--solo { grid-template-columns: 1fr; }
+  .booking--solo .booking__submit { grid-column: 1 / -1; }
   .nav, .topbar__left, .btn--book { display: none; }
   .nav-toggle { display: flex; }
   .header.is-open .mobile-menu { display: flex; }
