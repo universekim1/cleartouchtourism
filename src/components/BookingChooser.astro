@@ -15,7 +15,7 @@
      data-book                       → start at step 1
      data-book="photography"|"tour"  → jump to that step-2 list
      data-book-package="…"           → skip the chooser, book that thing
-     data-book-select="#exp"         → read a <select> and jump accordingly
+     data-book-select="#exp"         → read a <select> to pick the step-2 list
      data-book-guests="#guests"      → pass guest count into Cal's notes
    ======================================== */
 import { site, tours, photoPackages } from "../data/site";
@@ -40,14 +40,16 @@ const tourList = tours.map((t) => ({
 
 const bySlug = (s: string) => tours.find((t) => t.slug === s)?.name;
 
-// Maps the homepage hero's "What do you need" <select> onto a chooser answer,
-// so a visitor who already picked there is not asked the same thing twice.
+// The homepage hero's "What do you need" <select> answers step 1 only, so the
+// chooser opens straight at the matching list of tiles. It never books on its
+// own: an untouched dropdown sits on a blank placeholder, and the visitor
+// always picks their actual package or tour from the tiles.
 const heroMap: Record<string, string> = {
-  "Desert Safari": `Tour — ${bySlug("desert-safari")}`,
-  "Doha City Tour": `Tour — ${bySlug("doha-city-tour")}`,
-  "Dhow Cruise": `Tour — ${bySlug("dhow-cruise")}`,
-  "Photography Session": "step:photography",
-  "Video / Reel Shoot": "step:photography",
+  "Desert Safari": "tour",
+  "Doha City Tour": "tour",
+  "Dhow Cruise": "tour",
+  "Photography Session": "photography",
+  "Video / Reel Shoot": "photography",
 };
 
 const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: tourList, heroMap };
@@ -257,13 +259,12 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
       var fixed = trigger.getAttribute("data-book-package");
       if (fixed) { openCal(fixed, pendingNotes); return; }
 
-      // The hero's own dropdown already answers step 1 (and sometimes step 2).
+      // The hero's own dropdown answers step 1, so open that list of tiles.
       var selSel = trigger.getAttribute("data-book-select");
       if (selSel) {
         var sel = document.querySelector(selSel);
-        var mapped = sel && D.heroMap[sel.value];
-        if (mapped && mapped.indexOf("step:") === 0) { open(mapped.slice(5)); return; }
-        if (mapped) { openCal(mapped, pendingNotes); return; }
+        var mapped = sel && sel.value && D.heroMap[sel.value];
+        if (mapped) { open(mapped); return; }
       }
 
       var start = trigger.getAttribute("data-book");
