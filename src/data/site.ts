@@ -12,8 +12,13 @@ export const site = {
   googlePlaceId: "ChIJD92iwbDFRT4RlYl1ryF4gZ4",
   // Public Maps listing — "read all reviews" links.
   googleMapsUrl: "https://www.google.com/maps/place/?q=place_id:ChIJD92iwbDFRT4RlYl1ryF4gZ4",
+  // Tours: 3h, max 2/day. Slug kept from when one event covered both, so
+  // links shared before the 2026-08-31 split still resolve.
   calLink: "kiberu-jobs-slnno2/book-a-tour-or-photo-session",
   calUrl: "https://cal.com/kiberu-jobs-slnno2/book-a-tour-or-photo-session",
+  // Photo & video: 2h, max 2/day.
+  calLinkPhoto: "kiberu-jobs-slnno2/book-a-photo-session",
+  calUrlPhoto: "https://cal.com/kiberu-jobs-slnno2/book-a-photo-session",
   phone2: "+974 5991 4706",
   phone2Raw: "+97459914706",
   instagram: "https://www.instagram.com/clear_touch_media",

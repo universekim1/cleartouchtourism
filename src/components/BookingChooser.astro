@@ -8,8 +8,11 @@
      then    the Cal.com modal opens with `package` prefilled
 
    The answer lands in the Cal.com booking question whose IDENTIFIER (slug)
-   must be exactly `package`. Until that question exists on the event type,
-   the prefill is simply ignored — nothing breaks.
+   is exactly `package`, on both event types.
+
+   Photography and tours book into SEPARATE Cal.com event types (2h and 3h),
+   so a portrait session cannot swallow a half-day tour slot. Each option
+   carries the event type it belongs to.
 
    Any element on the site opens this by carrying `data-book`:
      data-book                       → start at step 1
@@ -25,6 +28,8 @@ const photography = photoPackages.map((p) => ({
   sub: p.tagline,
   badge: p.badge ?? null,
   value: `Photography — ${p.name}${p.tagline ? ` (${p.tagline})` : ""}`,
+  link: site.calLinkPhoto,
+  url: site.calUrlPhoto,
   // Weddings & Commercial is quote-based (ctaType "contact"), so it goes to
   // the enquiry form rather than a fixed calendar slot.
   href: p.ctaType === "contact" ? "/contact" : null,
@@ -35,6 +40,8 @@ const tourList = tours.map((t) => ({
   sub: `${t.duration} · from QAR ${t.from} per person`,
   badge: null,
   value: `Tour — ${t.name}`,
+  link: site.calLink,
+  url: site.calUrl,
   href: null,
 }));
 
@@ -103,7 +110,7 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
     <!-- ---------- step 2: photography ---------- -->
     <div class="bc__list" data-bc-panel="photography" hidden>
       {photography.map((o) => (
-        <button class="bc__opt" type="button" data-bc-value={o.value} data-bc-href={o.href}>
+        <button class="bc__opt" type="button" data-bc-value={o.value} data-bc-href={o.href} data-bc-link={o.link} data-bc-url={o.url}>
           <span class="bc__opt-main">
             <span class="bc__opt-title">
               {o.label}
@@ -119,7 +126,7 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
     <!-- ---------- step 2: tours ---------- -->
     <div class="bc__list" data-bc-panel="tour" hidden>
       {tourList.map((o) => (
-        <button class="bc__opt" type="button" data-bc-value={o.value}>
+        <button class="bc__opt" type="button" data-bc-value={o.value} data-bc-link={o.link} data-bc-url={o.url}>
           <span class="bc__opt-main">
             <span class="bc__opt-title">{o.label}</span>
             <span class="bc__opt-sub">{o.sub}</span>
@@ -186,7 +193,9 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
        slug of the booking question on the event type; `notes` is Cal's own
        "Additional notes" field. If the embed script hasn't loaded, fall back to
        the hosted booking page carrying the same values. */
-    function openCal(value, notes) {
+    function openCal(value, notes, link, url) {
+      link = link || D.calLink;
+      url = url || D.calUrl;
       var cfg = { layout: "month_view" };
       if (value) cfg.package = value;
       if (notes) cfg.notes = notes;
@@ -194,23 +203,23 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
       var api = window.Cal && window.Cal.ns && window.Cal.ns.book;
       if (api) {
         try {
-          api("modal", { calLink: D.calLink, config: cfg });
+          api("modal", { calLink: link, config: cfg });
           return true;
         } catch (e) {}
       }
       var q = [];
       for (var k in cfg) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(cfg[k]));
-      window.location.href = D.calUrl + "?" + q.join("&");
+      window.location.href = url + "?" + q.join("&");
       return true;
     }
 
-    function choose(value, href) {
+    function choose(value, href, link, url) {
       close();
       if (href) {
         window.location.href = href + "?package=" + encodeURIComponent(value);
         return;
       }
-      openCal(value, pendingNotes);
+      openCal(value, pendingNotes, link, url);
     }
 
     /* ---------- wiring ---------- */
@@ -222,7 +231,15 @@ const data = { calLink: site.calLink, calUrl: site.calUrl, photography, tour: to
       if (go) { show(go.getAttribute("data-bc-go")); return; }
 
       var opt = e.target.closest("[data-bc-value]");
-      if (opt) { choose(opt.getAttribute("data-bc-value"), opt.getAttribute("data-bc-href")); return; }
+      if (opt) {
+        choose(
+          opt.getAttribute("data-bc-value"),
+          opt.getAttribute("data-bc-href"),
+          opt.getAttribute("data-bc-link"),
+          opt.getAttribute("data-bc-url")
+        );
+        return;
+      }
 
       if (e.target.closest("#bcBack")) show("root");
     });
