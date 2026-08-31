@@ -147,7 +147,7 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
             <li><Icon name="clock" size={16} /> {tour.duration}</li>
             <li><Icon name="people" size={16} /> {tour.groupSize}</li>
           </ul>
-          <a class="btn btn--gold tour-book__cta" href={site.calUrl} data-cal-namespace="book" data-cal-link={site.calLink} data-cal-config='{"layout":"month_view"}'>Check availability <Icon name="arrow" size={17} /></a>
+          <a class="btn btn--gold tour-book__cta" href={site.calUrl} data-book-package={`Tour — ${tour.name}`}>Check availability <Icon name="arrow" size={17} /></a>
           <a class="btn btn--whatsapp tour-book__cta" href={wa}>Book on WhatsApp</a>
           <p class="tour-book__note">Fast confirmation · Real people on WhatsApp 24/7</p>
         </div>
