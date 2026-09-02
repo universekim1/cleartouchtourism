@@ -56,6 +56,7 @@ export const photoServices = [
 export const destinations = [
   { slug: "desert-safari",      name: "Desert Safari",         tag: "Inland Sea",      tour: "desert-safari" },
   { slug: "souq-waqif",         name: "Souq Waqif",            tag: "Old Doha",        tour: "doha-city-tour" },
+  { slug: "old-doha-port",      name: "Old Doha Port",         tag: "Mina District",   tour: "doha-city-tour" },
   { slug: "the-pearl",          name: "The Pearl Island",      tag: "Marina living",   tour: "doha-city-tour" },
   { slug: "museum-islamic-art", name: "Museum of Islamic Art", tag: "Iconic landmark", tour: "doha-city-tour" },
   { slug: "banana-island",      name: "Banana Island",         tag: "Resort escape",   tour: "banana-island" },
@@ -152,13 +153,14 @@ export const tours = [
     name: "Doha City Tour",
     tagline: "Old souqs, modern skylines & cultural icons in one day",
     img: "souq-waqif",
-    duration: "Approx. 4 hours",
+    duration: "Approx. 5 hours",
     groupSize: "Private or shared",
     overview:
-      "See the best of Doha with a local guide — from the winding lanes of Souq Waqif to the striking Museum of Islamic Art, the Corniche waterfront, the Pearl-Qatar and the cultural village of Katara. The perfect introduction to Qatar's past and its dazzling present.",
+      "See the best of Doha with a local guide — from the winding lanes of Souq Waqif to the striking Museum of Islamic Art, the painted houses of Old Doha Port, the Corniche waterfront, the Pearl-Qatar and the cultural village of Katara. The perfect introduction to Qatar's past and its dazzling present.",
     highlights: [
       "Souq Waqif — spices, crafts & old Doha",
       "Museum of Islamic Art & its gardens",
+      "Old Doha Port — the painted houses of Mina District",
       "The Corniche & West Bay skyline",
       "Katara Cultural Village",
       "Photo stops at the Pearl-Qatar",
@@ -168,12 +170,14 @@ export const tours = [
     itinerary: [
       { time: "Morning", title: "Souq Waqif", text: "Wander the restored old market — spices, textiles, falcons and traditional cafés." },
       { time: "Late morning", title: "Museum of Islamic Art", text: "Admire I. M. Pei's masterpiece and its world-class collection (exterior + gardens)." },
-      { time: "Midday", title: "Corniche & West Bay", text: "Drive the bay with photo stops beneath Doha's futuristic skyline." },
+      { time: "Midday", title: "Old Doha Port", text: "Walk Mina District's painted houses and murals, the old dhow harbour and the waterfront promenade." },
+      { time: "Early afternoon", title: "Corniche & West Bay", text: "Drive the bay with photo stops beneath Doha's futuristic skyline." },
       { time: "Afternoon", title: "Katara & The Pearl", text: "Explore the cultural village and the marina promenade before heading back." },
     ],
     experience: [
       "Souq Waqif is where the day starts, and where most people would happily spend it. The restored market is a warren of narrow lanes selling spices, oud, textiles and Persian carpets, with a falcon souq at one end where hooded birds sit on perches and their owners talk shop. Behind it are the Emiri horse stables. It is a working market, not a museum, and it smells like one.",
       "From there the city changes register entirely. The Museum of Islamic Art is I. M. Pei's last great building, set on its own island with fourteen centuries of art inside and a park behind it that frames the West Bay skyline better than any postcard. We drive the Corniche between stops, which is when the scale of what Qatar has built in thirty years lands.",
+      "Just south of the museum sits the part of the day nobody expects. Old Doha Port was the city's working harbour, and the Mina District behind it has been repainted top to bottom — pastel pink, lilac and blue houses, with whole façades handed to muralists, so an ordinary stairwell ends up beneath a four-storey portrait. The dhows are still moored along the water and the fishermen still use the slipway, which stops it feeling staged. Come early and the lanes are empty; it is the best colour in Doha and the easiest place on this tour to photograph.",
       "The afternoon runs on culture and coastline: Katara Cultural Village with its amphitheatre, galleries and tiled mosques, then the Pearl-Qatar, an island of marinas and pastel Mediterranean facades where Doha comes to walk in the evening. Your guide adjusts the order to the light and the crowds rather than marching a fixed list.",
     ],
     goodToKnow: [
@@ -184,13 +188,17 @@ export const tours = [
       { title: "Best time of year", text: "October to April is comfortable for walking. In high summer we keep stops shorter, lean on indoor sites, and run the tour later in the day." },
     ],
     faqs: [
-      { q: "Do we go inside the Museum of Islamic Art?", a: "The standard four hours covers the building, the island and MIA Park, which is where the skyline view is. Going inside is worth doing and easy to add — just say so when you book and we will allow the time and arrange tickets." },
-      { q: "Is this a good layover tour?", a: "One of the most common reasons people book it. Four hours plus airport transfers fits comfortably inside a long layover — check your own entry requirements, then send us your flight times and we will build the tour backwards from them." },
+      { q: "Do we go inside the Museum of Islamic Art?", a: "The standard five hours covers the building, the island and MIA Park, which is where the skyline view is. Going inside is worth doing and easy to add — just say so when you book and we will allow the time and arrange tickets." },
+      { q: "Is this a good layover tour?", a: "One of the most common reasons people book it. Five hours plus airport transfers still fits inside a long layover — check your own entry requirements, then send us your flight times and we will build the tour backwards from them." },
       { q: "Can we change the stops?", a: "Yes, on a private tour. Swap the Pearl for the National Museum of Qatar, add Lusail, spend longer in the souq — it is your afternoon. On shared departures the route is fixed." },
       { q: "Is it suitable for older travellers?", a: "Largely, yes. Every stop is reachable by vehicle and the walking is flat, but Souq Waqif is cobbled and uneven underfoot. Tell us about mobility needs and we will pick the drop-off points accordingly." },
       { q: "Can we do this and a desert safari in one day?", a: "You can, and many guests do — city tour in the morning, safari from the afternoon. It is a long day, so we suggest it mainly when your time in Qatar is short." },
     ],
-    gallery: ["souq-waqif", "museum-islamic-art", "katara", "national-museum"],
+    gallery: [
+      "old-doha-port", "souq-waqif", "old-doha-port-2", "museum-islamic-art",
+      "old-doha-port-3", "katara", "old-doha-port-4", "national-museum",
+      "old-doha-port-5", "old-doha-port-6",
+    ],
   },
   {
     slug: "dhow-cruise",
