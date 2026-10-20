@@ -423,6 +423,14 @@ export const photoAddons = [
   "Cinematic highlight film",
 ];
 
+// Studio policies shown under the packages (full wording in terms-of-service §9).
+// No prices here while photography prices stay off the site.
+export const photoPolicies = [
+  "We don't give out unedited (raw) photos or video",
+  "Extra edited photos are charged per photo",
+  "Unedited files are deleted 3 months after your session",
+];
+
 // "How it works" process steps.
 export const photoProcess = [
   { step: "01", title: "Enquire", text: "Message us your vision and dates on WhatsApp or Instagram — we reply fast." },

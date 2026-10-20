@@ -520,6 +520,7 @@ ul { list-style: none; padding: 0; }
 .pkg-cta { margin-top:auto; width:100%; justify-content:center; }
 .pkg-note { text-align:center; margin-top:30px; color: var(--ink-soft); font-size:.92rem; }
 .pkg-note strong { color: var(--ink); }
+.pkg-note a { color: var(--teal); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
 
 /* ---------- how it works (process) ---------- */
 .process-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; }
