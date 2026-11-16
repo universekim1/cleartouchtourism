@@ -7,7 +7,8 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import Vehicles from "../components/Vehicles.astro";
 import Globe from "../components/Globe.astro";
-import { site, experiences, photoServices, why, testimonials } from "../data/site";
+import Reviews from "../components/Reviews.astro";
+import { site, experiences, photoServices, why } from "../data/site";
 
 import hero from "../assets/images/hero.jpg";
 import about from "../assets/images/about.jpg";
@@ -209,32 +210,8 @@ const wa = `https://wa.me/${site.whatsapp}`;
     </div>
   </section>
 
-  <!-- ============ TESTIMONIALS ============
-       Verbatim quotes from real Google reviews (see testimonials in site.ts). -->
-  <section class="section section--navy" id="reviews">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Loved by our guests</p>
-        <h2 class="h-display">What our guests say</h2>
-        <p>Rated <b>5.0</b> <span class="rating">★★★★★</span> on Google.</p>
-      </div>
-      <div class="tgrid">
-        {testimonials.map((t) => (
-          <div class="tcard">
-            <div class="stars">★★★★★</div>
-            <blockquote>“{t.quote}”</blockquote>
-            <div class="tcard__who">
-              <div class="avatar">{t.initial}</div>
-              <div><b>{t.name}</b><span>{t.place}</span></div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <p class="treviews-link">
-        <a href={site.googleMapsUrl} target="_blank" rel="noopener">Read all our reviews on Google →</a>
-      </p>
-    </div>
-  </section>
+  <!-- ============ TESTIMONIALS ============ -->
+  <Reviews />
 
   <!-- ============ CTA BAND ============ -->
   <section class="section section--cream" id="contact">

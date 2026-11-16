@@ -6,6 +6,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Icon from "../../components/Icon.astro";
 import PageHero from "../../components/PageHero.astro";
+import Reviews from "../../components/Reviews.astro";
 import { site, tours } from "../../data/site";
 
 export function getStaticPaths() {
@@ -19,7 +20,7 @@ const img = (slug: string) => destImages[`../../assets/images/destinations/${slu
 const heroImg = img(tour.img);
 const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
 ---
-<Base title={`${tour.name} — Clear Touch Tours`} description={tour.tagline}>
+<Base title={`${tour.name} in Qatar — from QAR ${tour.from} | Clear Touch`} description={`${tour.tagline}. ${tour.duration}, ${tour.groupSize.toLowerCase()}, from QAR ${tour.from} per person. Local Doha team, rated 5.0 on Google.`}>
   <script
     type="application/ld+json"
     is:inline
@@ -59,7 +60,7 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
   />
   <Header active="tours" />
 
-  {heroImg && <PageHero image={heroImg} eyebrow="Tour" title={tour.name} subtitle={tour.tagline} />}
+  {heroImg && <PageHero image={heroImg} eyebrow="Tour" title={tour.name} subtitle={tour.tagline} alt={`${tour.name}, Qatar`} />}
 
   <section class="section section--cream">
     <div class="container tour-detail">
@@ -201,6 +202,8 @@ const others = tours.filter((t) => t.slug !== tour.slug).slice(0, 3);
       </div>
     </div>
   </section>
+
+  <Reviews />
 
   <Footer />
 </Base>

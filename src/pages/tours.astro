@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import PageHero from "../components/PageHero.astro";
+import Reviews from "../components/Reviews.astro";
 import { site, tours, destinations } from "../data/site";
 import heroImg from "../assets/images/destinations/desert-safari.jpg";
 
@@ -14,12 +15,13 @@ const destImages = import.meta.glob<{ default: ImageMetadata }>(
 const destImg = (slug: string) => destImages[`../assets/images/destinations/${slug}.jpg`]?.default;
 const wa = `https://wa.me/${site.whatsapp}`;
 ---
-<Base title="Tours & Experiences — Clear Touch Tourism & Services"
+<Base title="Doha Tours & Desert Safaris in Qatar | Clear Touch"
       description="Hand-crafted Qatar tours — desert safaris, Doha city tours, dhow cruises, island escapes, visa help and airport transfers.">
   <Header active="tours" />
 
-  <PageHero image={heroImg} eyebrow="Tours & experiences"
-    title="Explore Qatar your way"
+  <PageHero image={heroImg} eyebrow="Explore Qatar your way"
+    title="Doha Tours & Desert Safaris in Qatar"
+    alt="Clear Touch guests on a tour in Qatar"
     subtitle="From golden dunes to glittering skylines — ready-made adventures or a trip tailored just for you, with a trusted local team." />
 
   <section class="section section--cream">
@@ -86,6 +88,8 @@ const wa = `https://wa.me/${site.whatsapp}`;
       </div>
     </div>
   </section>
+
+  <Reviews />
 
   <Footer />
 </Base>

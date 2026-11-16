@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import PageHero from "../components/PageHero.astro";
+import Reviews from "../components/Reviews.astro";
 import { site, photoServices, photoPackages, photoAddons, photoPolicies, photoProcess } from "../data/site";
 import heroImg from "../assets/images/portfolio/portrait-maternity-couple.jpg";
 
@@ -19,11 +20,12 @@ const gallery = [...portfolio, ...destShots];
 const wa = `https://wa.me/${site.whatsapp}`;
 ---
 <Base title="Photography & Videography in Doha, Qatar | Clear Touch"
-      description="Doha-based photography and videography studio — travel and destination imagery, cinematic films and reels, weddings, events and portraits.">
+      description="Photographer and videographer in Doha, Qatar: weddings, birthdays, maternity, couples, family and travel shoots, plus cinematic reels. Rated 5.0 on Google.">
   <Header active="photography" />
 
-  <PageHero image={heroImg} eyebrow="Photography & video in Doha, Qatar"
-    title="Memories, beautifully made"
+  <PageHero image={heroImg} eyebrow="Memories, beautifully made"
+    title="Photographer & Videographer in Doha, Qatar"
+    alt="Maternity couple photoshoot in Doha by Clear Touch"
     subtitle="A Doha-based creative studio capturing travel, events and brands across Qatar — the same crew that knows every location on your tour." />
 
   <section class="section section--cream">
@@ -126,6 +128,8 @@ const wa = `https://wa.me/${site.whatsapp}`;
       </div>
     </div>
   </section>
+
+  <Reviews eyebrow="Reviews" title="What our clients say" />
 
   <Footer />
 </Base>
